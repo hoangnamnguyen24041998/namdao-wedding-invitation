@@ -1,12 +1,9 @@
-import { Col, ConfigProvider, Row } from "antd";
+import { Col, ConfigProvider } from "antd";
 import "./App.css";
-import { Logo } from "./assets";
-import HeartRain from "./components/heartRain";
-import YouTubeAudioPlayer from "./components/playSound";
 import TimeWeddingCountdown from "./components/TimeWeddingCountdown";
-import { ReactSVG } from "react-svg";
 import Introduce from "./components/Introduce";
 import Event from "./components/Event";
+import { HeartRain } from "./components";
 
 function App() {
   return (

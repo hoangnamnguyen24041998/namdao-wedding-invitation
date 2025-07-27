@@ -2,7 +2,9 @@ import { useState, useEffect } from "react";
 import Heart from "./heart";
 
 const HeartRain = ({ isShown = true }: { isShown: boolean }) => {
-  const [hearts, setHearts] = useState([]);
+  const [hearts, setHearts] = useState<
+    { id: number; style: React.CSSProperties }[]
+  >([]);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -16,11 +18,10 @@ const HeartRain = ({ isShown = true }: { isShown: boolean }) => {
 
       const id = Date.now();
 
-      const heart = <Heart key={id} style={style} />;
-      setHearts((prev) => [...prev, heart] as any);
+      setHearts((prev) => [...prev, { id, style }]);
 
       setTimeout(() => {
-        setHearts((prev) => prev.filter((h) => h.key !== String(id)));
+        setHearts((prev) => prev.filter((h) => h.id !== id));
       }, 4000);
     }, 800);
 
@@ -28,8 +29,15 @@ const HeartRain = ({ isShown = true }: { isShown: boolean }) => {
   }, []);
 
   if (!isShown) return null;
+  if (!isShown) return null;
 
-  return <div>{hearts}</div>;
-};
+  return (
+    <div>
+      {hearts.map((heart) => (
+        <Heart key={heart.id} style={heart.style} />
+      ))}
+    </div>
+  );
+}
 
 export default HeartRain;
