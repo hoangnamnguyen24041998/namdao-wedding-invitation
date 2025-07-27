@@ -10,8 +10,17 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@ant-design/icons": "^6.0.0",
+    "@ant-design/v5-patch-for-react-19": "^1.0.3",
+    "@fontsource/great-vibes": "^5.2.6",
+    "@tailwindcss/vite": "^4.1.11",
+    "antd": "^5.26.6",
+    "dayjs": "^1.11.13",
     "react": "^19.1.0",
-    "react-dom": "^19.1.0"
+    "react-dom": "^19.1.0",
+    "react-player": "^3.3.1",
+    "react-svg": "^16.3.0",
+    "tailwindcss": "^4.1.11"
   },
   "devDependencies": {
     "@eslint/js": "^9.30.1",

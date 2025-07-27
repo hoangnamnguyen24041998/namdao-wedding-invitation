@@ -1,35 +1,28 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { Col, ConfigProvider, Row } from "antd";
+import "./App.css";
+import { Logo } from "./assets";
+import HeartRain from "./components/heartRain";
+import YouTubeAudioPlayer from "./components/playSound";
+import TimeWeddingCountdown from "./components/TimeWeddingCountdown";
+import { ReactSVG } from "react-svg";
+import Introduce from "./components/Introduce";
+import Event from "./components/Event";
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <ConfigProvider>
+      <Col>
+        <HeartRain isShown={false} />
+        <TimeWeddingCountdown />
+        <div className="flex flex-row justify-center items-center w-screen h-auto relative overflow-visible">
+          <Introduce />
+        </div>
+        <div className="flex flex-row justify-center items-center w-screen h-auto relative overflow-visible">
+          <Event />
+        </div>
+      </Col>
+    </ConfigProvider>
+  );
 }
 
-export default App
+export default App;

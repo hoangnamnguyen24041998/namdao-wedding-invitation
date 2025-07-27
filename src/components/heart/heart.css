@@ -1,0 +1,27 @@
+.heart {
+  position: absolute;
+  animation: fall 5s linear infinite;
+  z-index: 10;
+}
+
+@keyframes fall {
+  0% {
+    top: -10%;
+    opacity: 1;
+  }
+  100% {
+    top: 100%;
+    opacity: 0;
+  }
+}
+
+.heart {
+  position: absolute;
+  animation: fall 5s linear forwards;
+}
+
+.heart svg {
+  width: 30px;
+  height: 30px;
+  fill: hotpink;
+}
