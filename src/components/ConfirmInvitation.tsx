@@ -1,6 +1,5 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Form, Input, Radio, Button, Typography, message } from "antd";
-import { ImgBG } from "../assets";
 
 const { Title } = Typography;
 

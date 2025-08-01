@@ -1,4 +1,3 @@
-import React from "react";
 import { Typography, Card, Image } from "antd";
 import { Fragment } from "react";
 import { Album01 } from "../assets";

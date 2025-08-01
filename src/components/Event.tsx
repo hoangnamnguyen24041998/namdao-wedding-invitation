@@ -1,5 +1,5 @@
 import { Card, Typography } from "antd";
-import { IcHeart, ImgBG } from "../assets";
+import { IcHeart } from "../assets";
 import { ReactSVG } from "react-svg";
 import { Fragment } from "react";
 

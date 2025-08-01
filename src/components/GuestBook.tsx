@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Form, Input, Button, Typography, message } from "antd";
 
 const { Title, Text } = Typography;
@@ -59,7 +59,7 @@ const GuestbookForm = () => {
     fetchData();
   }, [setLoading]);
 
-  console.log({ wishes });
+  console.log({ wishes, loadingWishes });
 
   return (
     <div className="flex items-center justify-center py-10 w-full flex-col pl-8 pr-8">
