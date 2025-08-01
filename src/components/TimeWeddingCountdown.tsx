@@ -44,7 +44,7 @@ function TimeWeddingCountdown() {
 
   return (
     <div
-      className="w-screen h-auto min-h-[15rem] bg-cover bg-center bg-no-repeat flex justify-center sm:px-6 md:px-10 lg:px-20 relative overflow-visible"
+      className="w-screen h-auto min-h-[50rem] bg-cover bg-center bg-no-repeat flex justify-center sm:px-6 md:px-10 lg:px-20 relative overflow-visible"
       style={{
         backgroundImage: `url(${ImgWedding01})`,
         backgroundSize: "cover",
@@ -76,7 +76,7 @@ function TimeWeddingCountdown() {
           <YouTubeAudioPlayer />
         </div>
       </Row>
-      <div className="w-full flex flex-col items-center px-4 pt-10 pb-10 text-center mt-14 sm:mt-16 md:mt-20 lg:mt-24">
+      <div className="w-full flex flex-col items-center px-4 pt-20 pb-10 text-center mt-14 sm:mt-16 md:mt-20 lg:mt-24">
         <Typography.Title
           level={1}
           className="text-xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-extrabold leading-tight"

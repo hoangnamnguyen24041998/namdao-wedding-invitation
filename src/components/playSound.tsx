@@ -54,6 +54,9 @@ const YouTubeAudioPlayer = () => {
         onMouseLeave={(e) => {
           e.currentTarget.style.transform = "scale(1)";
         }}
+        style={{
+          backgroundColor: "#333333",
+        }}
       />
     </div>
   );
