@@ -8,8 +8,8 @@ const HeartRain = ({ isShown = true }: { isShown: boolean }) => {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      const left = Math.random() * 100;
-      const size = 5 + Math.random() * 50;
+      const left = Math.random() * 20;
+      const size = 10 + Math.random() * 50;
 
       const style = {
         left: `${left}vw`,
