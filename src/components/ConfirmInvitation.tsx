@@ -1,11 +1,15 @@
 import { useState } from "react";
 import { Form, Input, Radio, Button, Typography, message } from "antd";
+import { ImgBG } from "../assets";
 
 const { Title } = Typography;
 
 const RSVPForm = () => {
   const [form] = Form.useForm();
   const [loading, setLoading] = useState(false);
+  const [submissions, setSubmissions] = useState<any[]>([]);
+
+  console.log({ submissions });
 
   const FORM_ID = "1FAIpQLSdGOYUlrGi4yXccmV59ED645X-KuJANTFmaZb4Ry3Xqw1boMw";
 
@@ -28,6 +32,8 @@ const RSVPForm = () => {
         mode: "no-cors",
         body: formData,
       });
+
+      setSubmissions((prev) => [...prev, values]);
       message.success("Cảm ơn bạn đã xác nhận!");
       form.resetFields();
     } catch (error) {
@@ -38,8 +44,15 @@ const RSVPForm = () => {
   };
 
   return (
-    <div className="flex items-center justify-center py-10 w-full flex-col pl-8 pr-8">
-      <div className="bg-white p-8 rounded-lg shadow-2xl w-full max-w-md">
+    <div
+      className="flex items-center justify-center py-10 px-4 sm:px-6 lg:px-20 w-full"
+      style={{
+        backgroundImage: `url(${ImgBG})`,
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+      }}
+    >
+      <div className="bg-white p-6 sm:p-8 rounded-xl shadow-2xl w-full max-w-md">
         <Title level={3} className="text-center text-pink-600 mb-6">
           Xác nhận tham dự
         </Title>

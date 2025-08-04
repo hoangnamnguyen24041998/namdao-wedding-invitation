@@ -1539,6 +1539,11 @@ fsevents@~2.3.2, fsevents@~2.3.3:
   resolved "https://registry.yarnpkg.com/fsevents/-/fsevents-2.3.3.tgz#cac6407785d03675a2a5e1a5305c697b347d90d6"
   integrity sha512-5xoDfX+fL7faATnagmWPpbFtwh/R77WmMMqqHGS65C3vvB0YHrgF+B1YmZ3441tMj5n63k0212XNoJwzlhffQw==
 
+full-copy@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/full-copy/-/full-copy-2.0.0.tgz#8fc90136ad3ea560ed8deed21c10102b64156dd3"
+  integrity sha512-GaSqR/7o+mbp5d6bGh9uW50CX3UK94CCYSd8NJ33rtU0Dtmj2VaHd0AbgY7hEvDAFEIuClKQSyZgGd1fMF4zlg==
+
 glob-parent@^5.1.2:
   version "5.1.2"
   resolved "https://registry.yarnpkg.com/glob-parent/-/glob-parent-5.1.2.tgz#869832c58034fe68a4093c17dc15e8340d8401c4"
@@ -2655,6 +2660,13 @@ uri-js@^4.2.2:
   integrity sha512-7rKUyy33Q1yc98pQ1DAmLtwX109F7TIfWlW1Ydo8Wl1ii1SeHieeh0HHfPeL2fMXK6z0s8ecKs9frCuLJvndBg==
   dependencies:
     punycode "^2.1.0"
+
+use-s-react@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/use-s-react/-/use-s-react-2.0.1.tgz#7a5782d78c05a2299ea9fc78ead91a692a2b1dd2"
+  integrity sha512-v3o+r0Vohj688xYK9eFk1sB2CAlMygOSwTfFKDM33G32hZ6DhIwXanO2e9mWkBJKIZs6gNZA+Cprhcux244V8A==
+  dependencies:
+    full-copy "^2.0.0"
 
 vimeo-video-element@^1.5.3:
   version "1.5.3"

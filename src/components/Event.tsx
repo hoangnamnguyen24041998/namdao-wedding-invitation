@@ -1,5 +1,5 @@
 import { Card, Typography } from "antd";
-import { IcHeart } from "../assets";
+import { IcHeart, ImgWedding02 } from "../assets";
 import { ReactSVG } from "react-svg";
 import { Fragment } from "react";
 
@@ -9,38 +9,37 @@ const listData = [
     nameEvent: "Tiệc cưới nhà trai",
     placeEventName: "Tư gia nhà trai",
     placeEventAddress: "Xã Đức Hoà Hạ, Huyện Đức Hoà, Tỉnh Long An",
-    timeWelcome: "00:00",
-    timeEvent: "00:00",
+    timeWelcome: "10:00",
+    timeEvent: "11:00",
     dateEvent: "Thứ hai, 11.10.25",
   },
   {
     id: 2,
-    nameEvent: "Tiệc cưới nhà trai",
-    placeEventName: "Tư gia nhà trai",
-    placeEventAddress: "Xã Đức Hoà Hạ, Huyện Đức Hoà, Tỉnh Long An",
-    timeWelcome: "00:00",
-    timeEvent: "00:00",
-    dateEvent: "Thứ hai, 11.10.25",
+    nameEvent: "Tiệc cưới nhà gái",
+    placeEventName: "Tư gia nhà gái",
+    placeEventAddress: "Phường 5, Quận 8, TP. Hồ Chí Minh",
+    timeWelcome: "17:00",
+    timeEvent: "18:00",
+    dateEvent: "Thứ ba, 12.10.25",
   },
   {
     id: 3,
-    nameEvent: "Tiệc cưới nhà trai",
-    placeEventName: "Tư gia nhà trai",
-    placeEventAddress: "Xã Đức Hoà Hạ, Huyện Đức Hoà, Tỉnh Long An",
-    timeWelcome: "00:00",
-    timeEvent: "00:00",
-    dateEvent: "Thứ hai, 11.10.25",
+    nameEvent: "Lễ thành hôn",
+    placeEventName: "Trung tâm tiệc cưới",
+    placeEventAddress: "Quận 1, TP. Hồ Chí Minh",
+    timeWelcome: "18:00",
+    timeEvent: "19:00",
+    dateEvent: "Thứ tư, 13.10.25",
   },
 ];
 
 const CardEvent = ({ data }: { data: any }) => {
   return (
-    <div className="w-full sm:w-[22rem] flex justify-center items-center p-4">
+    <div className="w-full sm:w-[20rem] flex justify-center items-center p-4">
       <Card
         className="bg-white bg-opacity-10 border border-white/30 shadow-lg backdrop-blur-md w-full"
         style={{
           borderRadius: "16px",
-          height: "auto",
         }}
       >
         <div className="text-center space-y-3 py-6 px-4">
@@ -71,36 +70,35 @@ const CardEvent = ({ data }: { data: any }) => {
 
 function Event() {
   return (
-    <div className="w-screen h-auto min-h-[40rem] sm:px-6 md:px-10 lg:px-20 bg-cover bg-center bg-no-repeat flex justify-center relative overflow-visible max-w-screen-lg mx-auto">
-      <div className="w-screen p-8 bg-[#000000] opacity-45 flex flex-col items-center">
+    <div className="w-full bg-cover bg-center bg-no-repeat relative overflow-visible px-4 sm:px-6 md:px-10 lg:px-20 py-10">
+      <div
+        className="w-full max-w-screen-xl mx-auto bg-black opacity-50 rounded-xl p-8 flex flex-col items-center text-center"
+        style={{
+          backgroundImage: `url(${ImgWedding02})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+        }}
+      >
         <Typography.Title
-          style={{ color: "#FEFEFE" }}
-          className="block text-center text-white italic text-base sm:text-lg"
+          style={{ color: "#fff", fontWeight: 500 }}
+          className="text-white italic text-lg sm:text-xl md:text-2xl"
         >
           Sự kiện cưới
         </Typography.Title>
-        <div className="w-screen flex flex-row justify-center items-center gap-8 mt-4 mb-4">
-          <div
-            style={{
-              width: "9.375rem",
-              height: "0.063rem",
-              backgroundColor: "#fff",
-            }}
-          />
-          <ReactSVG src={IcHeart} />
-          <div
-            style={{
-              width: "9.375rem",
-              height: "0.063rem",
-              backgroundColor: "#fff",
-            }}
-          />
+        <div className="flex flex-row items-center justify-center gap-4 mt-4 mb-4 w-full max-w-md">
+          <div className="flex-grow h-0.5 bg-white rounded-2xl" />
+          <ReactSVG src={IcHeart} className="w-6 h-6 text-pink-500" />
+          <div className="flex-grow h-0.5 bg-white rounded-2xl" />
         </div>
-        <Typography.Text style={{ fontSize: "1.375rem", color: "#ffffff" }}>
+        <Typography.Text
+          className="text-white text-base sm:text-lg max-w-md"
+          style={{ color: "#ffffff", fontWeight: 700 }}
+        >
           ...tình yêu không phải là nhìn vào nhau, mà là nhìn về chung một
           hướng...
         </Typography.Text>
-        <div className="mt-8 w-full flex flex-col sm:flex-row justify-center items-center gap-6">
+        <div className="mt-8 w-full flex flex-wrap justify-center items-stretch gap-6">
           {listData.map((item) => (
             <Fragment key={item.id}>
               <CardEvent data={item} />

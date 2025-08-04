@@ -1,6 +1,5 @@
 import { Row, Typography, Col } from "antd";
-import { IcHeart, ImgHN, ImgXD } from "../assets";
-import { ReactSVG } from "react-svg";
+import { ImgHN, ImgXD } from "../assets";
 
 function Introduce() {
   return (
@@ -9,46 +8,57 @@ function Introduce() {
         level={3}
         className="text-pink-500 font-semibold mb-2 text-lg sm:text-xl md:text-2xl"
       >
-        Chào bạn
+        Chào bạn thân mến
       </Typography.Title>
-      <Typography.Text className="block text-base sm:text-lg md:text-xl text-gray-700 mb-6">
-        Mời bạn cùng chúng tôi đánh dấu khoảnh khắc trọng đại của cuộc đời
+      <Typography.Text className="block text-base sm:text-lg md:text-xl text-gray-700 mb-6 max-w-xl">
+        Chúng tôi rất vui được chia sẻ khoảnh khắc thiêng liêng này cùng bạn –
+        một hành trình yêu thương bắt đầu bằng lời hứa trọn đời.
       </Typography.Text>
-      <Row
-        justify="center"
-        align="middle"
-        className="w-full flex flex-wrap items-center justify-center gap-x-4 sm:gap-x-6 md:gap-x-8 lg:gap-x-12"
-      >
-        <Row className="flex flex-col items-center gap-8">
-          <Typography.Text className="mt-2 text-2xl sm:text-base font-medium text-white">
-            Hoàng Nam
-            <br />
-            <Typography.Text>Mình là Nam</Typography.Text>
-          </Typography.Text>
-          <img
-            src={ImgHN}
-            alt="Hoàng Nam"
-            className="w-28 sm:w-32 md:w-36 lg:w-40 rounded-md"
-          />
-        </Row>
-        <Col className="flex items-center justify-center">
-          <ReactSVG
-            src={IcHeart}
-            className="w-8 h-8 sm:w-10 sm:h-10 text-pink-500"
-          />
+      <Row gutter={[24, 24]} className="w-full max-w-4xl flex-wrap mt-8">
+        <Col
+          xs={24}
+          sm={10}
+          className="flex flex-col items-center justify-center text-center"
+        >
+          <div className="flex flex-col items-center">
+            <img
+              src={ImgHN}
+              alt="Hoàng Nam"
+              className="w-28 sm:w-32 md:w-36 lg:w-40 rounded-md shadow-md mb-4"
+            />
+            <div className="text-center">
+              <Typography.Text className="text-lg font-semibold text-gray-800">
+                Hoàng Nam
+              </Typography.Text>
+              <br />
+              <Typography.Text className="text-sm text-gray-600 italic">
+                người mang đến sự ấm áp và tiếng cười.
+              </Typography.Text>
+            </div>
+          </div>
         </Col>
-        <Row className="flex flex-col items-center gap-8">
-          <img
-            src={ImgXD}
-            alt="Xuân Đào"
-            className="w-28 sm:w-32 md:w-36 lg:w-40 rounded-md"
-          />
-          <Typography.Text className="mt-2 text-sm sm:text-base font-medium text-white">
-            Xuân Đào
-            <br />
-            <Typography.Text>Mình là Xuân Đào</Typography.Text>
-          </Typography.Text>
-        </Row>
+        <Col
+          xs={24}
+          sm={10}
+          className="flex flex-col items-center justify-center text-center"
+        >
+          <div className="flex flex-col items-center">
+            <img
+              src={ImgXD}
+              alt="Hoàng Nam"
+              className="w-28 sm:w-32 md:w-36 lg:w-40 rounded-md shadow-md mb-4"
+            />
+            <div className="text-center">
+              <Typography.Text className="text-lg font-semibold text-gray-800">
+                Xuân Đào{" - "}
+              </Typography.Text>
+              <br />
+              <Typography.Text className="text-sm text-gray-600 italic">
+                người khiến mọi khoảnh khắc trở nên dịu dàng và đáng nhớ.
+              </Typography.Text>
+            </div>
+          </div>
+        </Col>
       </Row>
     </div>
   );

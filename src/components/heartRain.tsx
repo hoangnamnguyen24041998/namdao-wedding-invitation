@@ -7,13 +7,18 @@ const HeartRain = ({ isShown = true }: { isShown: boolean }) => {
   >([]);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      const left = Math.random() * 20;
-      const size = 10 + Math.random() * 50;
+    if (!isShown) return;
 
-      const style = {
+    const interval = setInterval(() => {
+      const left = Math.random() * 100;
+      const size = 1 + Math.random() * 2.5;
+
+      const style: React.CSSProperties = {
         left: `${left}vw`,
-        fontSize: `${size}px`,
+        fontSize: `${size}em`,
+        animationDuration: `${3 + Math.random() * 2}s`,
+        position: "absolute",
+        top: 0,
       };
 
       const id = Date.now();
@@ -22,22 +27,32 @@ const HeartRain = ({ isShown = true }: { isShown: boolean }) => {
 
       setTimeout(() => {
         setHearts((prev) => prev.filter((h) => h.id !== id));
-      }, 4000);
-    }, 800);
+      }, 5000);
+    }, 1200);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [isShown]);
 
-  if (!isShown) return null;
   if (!isShown) return null;
 
   return (
-    <div>
+    <div
+      style={{
+        position: "fixed",
+        top: 0,
+        left: 0,
+        width: "100vw",
+        height: "100vh",
+        overflow: "hidden",
+        pointerEvents: "none",
+        zIndex: 9999,
+      }}
+    >
       {hearts.map((heart) => (
         <Heart key={heart.id} style={heart.style} />
       ))}
     </div>
   );
-}
+};
 
 export default HeartRain;
