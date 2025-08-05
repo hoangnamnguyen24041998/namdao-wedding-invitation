@@ -1,15 +1,27 @@
 import { useState } from "react";
 import { Form, Input, Radio, Button, Typography, message } from "antd";
 import { ImgBG } from "../assets";
+import { useS } from "use-s-react";
+import AOS from "aos";
+import "aos/dist/aos.css";
+import { useEffect } from "react";
 
 const { Title } = Typography;
 
-const RSVPForm = () => {
+const ConfirmInvitation = () => {
   const [form] = Form.useForm();
   const [loading, setLoading] = useState(false);
-  const [submissions, setSubmissions] = useState<any[]>([]);
+  const [_, setSubmissions] = useS({
+    value: [],
+    key: "confirm-join",
+  });
 
-  console.log({ submissions });
+  useEffect(() => {
+    AOS.init({
+      duration: 1000,
+      once: true,
+    });
+  }, []);
 
   const FORM_ID = "1FAIpQLSdGOYUlrGi4yXccmV59ED645X-KuJANTFmaZb4Ry3Xqw1boMw";
 
@@ -51,6 +63,7 @@ const RSVPForm = () => {
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
       }}
+      data-aos="fade-in"
     >
       <div className="bg-white p-6 sm:p-8 rounded-xl shadow-2xl w-full max-w-md">
         <Title level={3} className="text-center text-pink-600 mb-6">
@@ -92,4 +105,4 @@ const RSVPForm = () => {
   );
 };
 
-export default RSVPForm;
+export default ConfirmInvitation;

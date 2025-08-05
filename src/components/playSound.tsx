@@ -25,13 +25,17 @@ const YouTubeAudioPlayer = () => {
         type="text"
         icon={
           isPlaying ? (
-            <PauseCircleOutlined style={{ color: "#fff" }} />
+            <PauseCircleOutlined
+              style={{ color: "#fefefe", fontSize: "1.5rem" }}
+            />
           ) : (
-            <PlayCircleOutlined style={{ color: "#fff" }} />
+            <PlayCircleOutlined
+              style={{ color: "#fefefe", fontSize: "1.5rem" }}
+            />
           )
         }
         onClick={togglePlayback}
-        className="fixed bottom-0 right-0 z-50 bg-black bg-opacity-60 p-2 rounded-full"
+        className="fixed bottom-0 right-0 z-50 bg-[#F4146E] hover:bg-[#d10c5c] p-2 rounded-full transition-colors duration-300"
       />
     </div>
   );

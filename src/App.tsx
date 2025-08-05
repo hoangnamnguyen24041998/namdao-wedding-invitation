@@ -4,9 +4,10 @@ import TimeWeddingCountdown from "./components/TimeWeddingCountdown";
 import Introduce from "./components/Introduce";
 import Event from "./components/Event";
 import { HeartRain } from "./components";
-import WeddingAlbum from "./components/WeddingAlbum";
-import RSVPForm from "./components/ConfirmInvitation";
+import WeddingAlbum from "./components/WeddingAlbum/WeddingAlbum";
 import GuestbookForm from "./components/GuestBook";
+import ConfirmInvitation from "./components/ConfirmInvitation";
+import ListWishes from "./components/ListWishes/ListWishes";
 
 function App() {
   return (
@@ -24,7 +25,10 @@ function App() {
           <WeddingAlbum />
         </div>
         <div className="flex flex-row justify-center items-center w-screen h-auto relative overflow-visible">
-          <RSVPForm />
+          <ConfirmInvitation />
+        </div>
+        <div className="flex flex-row justify-center items-center w-screen h-auto relative overflow-visible">
+          <ListWishes />
         </div>
         <div className="flex flex-row justify-center items-center w-screen h-auto relative overflow-visible">
           <GuestbookForm />

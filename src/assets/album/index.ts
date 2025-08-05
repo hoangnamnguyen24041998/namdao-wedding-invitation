@@ -9,6 +9,7 @@ import Img08 from "./Img08.jpg";
 import Img09 from "./Img09.jpg";
 import Img10 from "./Img10.jpg";
 import Img11 from "./Img11.jpg";
+import Img12 from "./Img12.jpg";
 
 export {
   Img01,
@@ -22,4 +23,5 @@ export {
   Img09,
   Img10,
   Img11,
+  Img12,
 };

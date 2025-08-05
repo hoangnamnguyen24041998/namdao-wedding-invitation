@@ -50,7 +50,7 @@ function Introduce() {
             />
             <div className="text-center">
               <Typography.Text className="text-lg font-semibold text-gray-800">
-                Xuân Đào{" - "}
+                Xuân Đào
               </Typography.Text>
               <br />
               <Typography.Text className="text-sm text-gray-600 italic">

@@ -1,7 +1,9 @@
 import { Card, Typography } from "antd";
 import { IcHeart, ImgWedding02 } from "../assets";
 import { ReactSVG } from "react-svg";
-import { Fragment } from "react";
+import { Fragment, useEffect, useState } from "react";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const listData = [
   {
@@ -17,23 +19,23 @@ const listData = [
     id: 2,
     nameEvent: "Tiệc cưới nhà gái",
     placeEventName: "Tư gia nhà gái",
-    placeEventAddress: "Phường 5, Quận 8, TP. Hồ Chí Minh",
+    placeEventAddress: "Xã Tân Phú, Huyện Thanh Bình, Tỉnh Đòng Tháp",
     timeWelcome: "17:00",
     timeEvent: "18:00",
-    dateEvent: "Thứ ba, 12.10.25",
+    dateEvent: "Thứ ba, 01.11.25",
   },
   {
     id: 3,
     nameEvent: "Lễ thành hôn",
     placeEventName: "Trung tâm tiệc cưới",
-    placeEventAddress: "Quận 1, TP. Hồ Chí Minh",
-    timeWelcome: "18:00",
-    timeEvent: "19:00",
-    dateEvent: "Thứ tư, 13.10.25",
+    placeEventAddress: "Gold Palace, 973 Nơ Trang Long, Quận Bình Thạnh",
+    timeWelcome: "10:00",
+    timeEvent: "11:00",
+    dateEvent: "Thứ tư, 09.11.25",
   },
 ];
 
-const CardEvent = ({ data }: { data: any }) => {
+const CardEvent = ({ data, onClick }: { data: any; onClick: () => void }) => {
   return (
     <div className="w-full sm:w-[20rem] flex justify-center items-center p-4">
       <Card
@@ -41,6 +43,8 @@ const CardEvent = ({ data }: { data: any }) => {
         style={{
           borderRadius: "16px",
         }}
+        onClick={onClick}
+        data-aos="zoom-in"
       >
         <div className="text-center space-y-3 py-6 px-4">
           <Typography.Title
@@ -69,10 +73,19 @@ const CardEvent = ({ data }: { data: any }) => {
 };
 
 function Event() {
+  const [selectedLocation, setSelectedLocation] = useState<string | null>(null);
+
+  useEffect(() => {
+    AOS.init({
+      duration: 1000,
+      once: true,
+    });
+  }, []);
+
   return (
     <div className="w-full bg-cover bg-center bg-no-repeat relative overflow-visible px-4 sm:px-6 md:px-10 lg:px-20 py-10">
       <div
-        className="w-full max-w-screen-xl mx-auto bg-black opacity-50 rounded-xl p-8 flex flex-col items-center text-center"
+        className="bg-transparent rounded-xl p-8 flex flex-col items-center text-center"
         style={{
           backgroundImage: `url(${ImgWedding02})`,
           backgroundSize: "cover",
@@ -81,8 +94,13 @@ function Event() {
         }}
       >
         <Typography.Title
-          style={{ color: "#fff", fontWeight: 500 }}
-          className="text-white italic text-lg sm:text-xl md:text-2xl"
+          data-aos="fade-up"
+          style={{
+            color: "#fff",
+            fontWeight: 600,
+            textShadow: "0 1px 3px rgba(0,0,0,0.6)",
+          }}
+          className="italic text-lg sm:text-xl md:text-2xl"
         >
           Sự kiện cưới
         </Typography.Title>
@@ -100,11 +118,40 @@ function Event() {
         </Typography.Text>
         <div className="mt-8 w-full flex flex-wrap justify-center items-stretch gap-6">
           {listData.map((item) => (
-            <Fragment key={item.id}>
-              <CardEvent data={item} />
+            <Fragment key={item.id} data-aos="zoom-in">
+              <CardEvent
+                data={item}
+                onClick={() => setSelectedLocation(item.placeEventAddress)}
+              />
             </Fragment>
           ))}
         </div>
+        {selectedLocation && (
+          <div
+            className="fixed inset-0 bg-black bg-opacity-80 flex justify-center items-center z-50"
+            data-aos="fade-up"
+          >
+            <div className="bg-white rounded-lg p-4 w-full max-w-2xl shadow-xl relative">
+              <button
+                className="absolute top-2 right-2 text-gray-600 hover:text-black"
+                onClick={() => setSelectedLocation(null)}
+              >
+                ✖
+              </button>
+              <Typography.Title level={4}>Bản đồ địa điểm</Typography.Title>
+              <iframe
+                src={`https://www.google.com/maps?q=${encodeURIComponent(
+                  selectedLocation
+                )}&output=embed`}
+                width="100%"
+                height="400"
+                style={{ border: 0 }}
+                allowFullScreen
+                loading="lazy"
+              />
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

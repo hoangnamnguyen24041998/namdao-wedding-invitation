@@ -12,6 +12,13 @@ function TimeWeddingCountdown() {
     minutes: 0,
     seconds: 0,
   });
+  const [bgLoaded, setBgLoaded] = useState(false);
+
+  useEffect(() => {
+    const img = new Image();
+    img.src = ImgWedding01;
+    img.onload = () => setBgLoaded(true);
+  }, []);
 
   useEffect(() => {
     const targetDate = dayjs("2025-10-11T00:00:00");
@@ -44,12 +51,17 @@ function TimeWeddingCountdown() {
 
   return (
     <div
-      className="w-screen h-auto min-h-[100vh] bg-cover bg-center bg-no-repeat relative overflow-hidden"
+      className={`w-screen h-auto min-h-[100vh] bg-center bg-no-repeat relative overflow-hidden transition-opacity duration-1000 ${
+        bgLoaded ? "opacity-100" : "opacity-0"
+      }`}
       style={{
         backgroundImage: `url(${ImgWedding01})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
+        transition: "opacity 1s ease-in-out",
+        opacity: bgLoaded ? 1 : 0.5,
+        filter: bgLoaded ? "none" : "blur(10px)",
       }}
     >
       <div className="absolute inset-0 bg-black opacity-40 z-0" />
@@ -70,8 +82,8 @@ function TimeWeddingCountdown() {
           <div
             style={{
               position: "fixed",
-              top: "20px",
-              right: "20px",
+              top: "1rem",
+              right: "1rem",
               zIndex: 10000,
             }}
           >
@@ -81,10 +93,12 @@ function TimeWeddingCountdown() {
 
         <Typography.Title
           level={1}
-          className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-extrabold leading-tight mt-14"
+          className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-extrabold leading-tight mt-28"
           style={{ color: "#ffffff", fontFamily: "'Great Vibes', cursive" }}
         >
-          Xuân Đào & Hoàng Nam
+          Xuân Đào
+          <br />&<br />
+          Hoàng Nam
         </Typography.Title>
 
         <Typography.Title
