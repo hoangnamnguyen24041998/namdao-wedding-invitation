@@ -46,7 +46,7 @@ const CardEvent = ({ data, onClick }: { data: any; onClick: () => void }) => {
         onClick={onClick}
         data-aos="zoom-in"
       >
-        <div className="text-center space-y-3 py-6 px-4">
+        <div className="text-center space-y-3 py-6">
           <Typography.Title
             level={4}
             className="text-white font-bold text-lg sm:text-xl"
@@ -88,9 +88,10 @@ function Event() {
         className="bg-transparent rounded-xl p-8 flex flex-col items-center text-center"
         style={{
           backgroundImage: `url(${ImgWedding02})`,
-          backgroundSize: "cover",
+          backgroundSize: "contain",
           backgroundPosition: "center",
-          backgroundRepeat: "no-repeat",
+          backgroundRepeat: "repeat",
+          objectFit: "cover",
         }}
       >
         <Typography.Title
