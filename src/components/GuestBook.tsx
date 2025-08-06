@@ -1,7 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Form, Input, Button, Typography, message } from "antd";
 import { ImgBgFlower } from "../assets";
 import { useS } from "use-s-react";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const { Title, Text } = Typography;
 
@@ -12,6 +14,13 @@ const GuestbookForm = () => {
     value: [],
     key: "guest-book",
   });
+
+  useEffect(() => {
+    AOS.init({
+      duration: 1000,
+      once: true,
+    });
+  }, []);
 
   const GOOGLE_FORM_ACTION =
     "https://docs.google.com/forms/u/0/d/e/1FAIpQLSfo9DsxLroPh-_XTAIiq6hcXCPYjXxkV8IX5hVeEsNkVxiHZQ/formResponse";

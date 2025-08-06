@@ -1,5 +1,5 @@
-import { Card, Typography } from "antd";
-import { IcHeart, ImgWedding02 } from "../assets";
+import { Card, Typography, Modal } from "antd";
+import { IcHeart, ImgBgLotus } from "../assets";
 import { ReactSVG } from "react-svg";
 import { Fragment, useEffect, useState } from "react";
 import AOS from "aos";
@@ -35,7 +35,15 @@ const listData = [
   },
 ];
 
-const CardEvent = ({ data, onClick }: { data: any; onClick: () => void }) => {
+const CardEvent = ({
+  data,
+  onClick,
+  onOpenMap,
+}: {
+  data: any;
+  onClick: () => void;
+  onOpenMap: () => void;
+}) => {
   return (
     <div className="w-full sm:w-[20rem] flex justify-center items-center p-4">
       <Card
@@ -66,6 +74,12 @@ const CardEvent = ({ data, onClick }: { data: any; onClick: () => void }) => {
             <br />
             <Typography.Text>📅 {data?.dateEvent}</Typography.Text>
           </div>
+          <button
+            onClick={onOpenMap}
+            className="mt-4 bg-pink-500 text-white rounded px-4 py-2"
+          >
+            Mở bản đồ
+          </button>
         </div>
       </Card>
     </div>
@@ -74,6 +88,7 @@ const CardEvent = ({ data, onClick }: { data: any; onClick: () => void }) => {
 
 function Event() {
   const [selectedLocation, setSelectedLocation] = useState<string | null>(null);
+  const [isModalVisible, setIsModalVisible] = useState(false);
 
   useEffect(() => {
     AOS.init({
@@ -82,15 +97,36 @@ function Event() {
     });
   }, []);
 
+  const handleOpenMap = (address: string) => {
+    setSelectedLocation(address);
+    setIsModalVisible(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalVisible(false);
+    setSelectedLocation(null);
+  };
+
+  const handleOpenDirections = () => {
+    if (selectedLocation) {
+      window.open(
+        `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(
+          selectedLocation
+        )}`,
+        "_blank"
+      );
+    }
+  };
+
   return (
     <div className="w-full bg-cover bg-center bg-no-repeat relative overflow-visible px-4 sm:px-6 md:px-10 lg:px-20 py-10">
       <div
         className="bg-transparent rounded-xl p-8 flex flex-col items-center text-center"
         style={{
-          backgroundImage: `url(${ImgWedding02})`,
-          backgroundSize: "contain",
+          backgroundImage: `url(${ImgBgLotus})`,
+          backgroundSize: "cover",
           backgroundPosition: "center",
-          backgroundRepeat: "repeat",
+          backgroundRepeat: "no-repeat",
           objectFit: "cover",
         }}
       >
@@ -123,37 +159,37 @@ function Event() {
               <CardEvent
                 data={item}
                 onClick={() => setSelectedLocation(item.placeEventAddress)}
+                onOpenMap={() => handleOpenMap(item.placeEventAddress)}
               />
             </Fragment>
           ))}
         </div>
-        {selectedLocation && (
-          <div
-            className="fixed inset-0 bg-black bg-opacity-80 flex justify-center items-center z-50"
-            data-aos="fade-up"
-          >
-            <div className="bg-white rounded-lg p-4 w-full max-w-2xl shadow-xl relative">
-              <button
-                className="absolute top-2 right-2 text-gray-600 hover:text-black"
-                onClick={() => setSelectedLocation(null)}
-              >
-                ✖
-              </button>
-              <Typography.Title level={4}>Bản đồ địa điểm</Typography.Title>
-              <iframe
-                src={`https://www.google.com/maps?q=${encodeURIComponent(
-                  selectedLocation
-                )}&output=embed`}
-                width="100%"
-                height="400"
-                style={{ border: 0 }}
-                allowFullScreen
-                loading="lazy"
-              />
-            </div>
-          </div>
-        )}
       </div>
+
+      <Modal
+        title="Bản đồ địa điểm"
+        visible={isModalVisible}
+        onCancel={handleCloseModal}
+        footer={null}
+        width={800}
+      >
+        <iframe
+          src={`https://www.google.com/maps?q=${encodeURIComponent(
+            selectedLocation || ""
+          )}&output=embed`}
+          width="100%"
+          height="400"
+          style={{ border: 0 }}
+          allowFullScreen
+          loading="lazy"
+        />
+        <button
+          onClick={handleOpenDirections}
+          className="mt-4 bg-pink-500 text-white rounded px-4 py-2"
+        >
+          Mở chỉ đường
+        </button>
+      </Modal>
     </div>
   );
 }

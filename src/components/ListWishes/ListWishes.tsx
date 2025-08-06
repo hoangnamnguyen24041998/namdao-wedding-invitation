@@ -1,4 +1,4 @@
-import { Typography, Avatar } from "antd";
+import { Typography, Avatar, Badge } from "antd";
 import { useCallback, useEffect, useRef, useState } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
@@ -16,26 +16,22 @@ const ListWishes = () => {
     value: [],
     key: "guest-book",
   });
+  const [isAutoScrolling, setIsAutoScrolling] = useState(true);
 
   const scrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const interval = setInterval(() => {
       const nextIndex = index + 1;
-      if (nextIndex <= submissions.length - 1) {
-        const slice = submissions.slice(
-          Math.max(0, nextIndex - 5),
-          nextIndex + 1
-        );
-        setSubmissions(slice);
+      if (nextIndex < submissions.length) {
         setIndex(nextIndex);
       } else {
-        clearInterval(interval);
+        setIndex(0);
       }
     }, 2000);
 
     return () => clearInterval(interval);
-  }, [submissions, index, setSubmissions]);
+  }, [submissions, index]);
 
   useEffect(() => {
     if (scrollRef.current) {
@@ -44,7 +40,11 @@ const ListWishes = () => {
         behavior: "smooth",
       });
     }
-  }, [submissions]);
+  }, [index]);
+
+  const handleScroll = () => {
+    setIsAutoScrolling(false); // User has scrolled manually
+  };
 
   const GOOGLE_SHEET_CSV_URL =
     "https://docs.google.com/spreadsheets/d/e/2PACX-1vSUpRLXHpjwdozPjInP58FWoac66_zavynrvLCY9eF4qZQq4xywvaiPaXIHLcdt2GBZX1278ZYf3lgi/pub?output=csv";
@@ -67,6 +67,21 @@ const ListWishes = () => {
     fetchData();
   }, [fetchData]);
 
+  const renderDots = () => {
+    return (
+      <div className="flex justify-center space-x-2 mt-4">
+        {submissions.map((_, i) => (
+          <div
+            key={i}
+            className={`h-3 w-3 rounded-full ${
+              i === index ? "bg-pink-500 opacity-100" : "bg-gray-300 opacity-50"
+            }`}
+          />
+        ))}
+      </div>
+    );
+  };
+
   if (submissions.length > 0)
     return (
       <div className="w-full max-w-md mx-auto py-10 px-4">
@@ -80,8 +95,9 @@ const ListWishes = () => {
         <div
           ref={scrollRef}
           className="max-h-96 overflow-y-auto space-y-4 px-2"
+          onScroll={handleScroll} // Detect user scroll
         >
-          {submissions.map((wish: any, i: number) => (
+          {submissions.slice(index, index + 1).map((wish: any, i: number) => (
             <div
               key={wish.name}
               className="bg-white/10 backdrop-blur-md rounded-xl p-4 shadow-md text-white flex items-start gap-4"
@@ -99,6 +115,12 @@ const ListWishes = () => {
             </div>
           ))}
         </div>
+        {!isAutoScrolling && (
+          <div className="text-center text-yellow-500 mt-2">
+            <Badge count="Manual Scroll Detected" overflowCount={10} />
+          </div>
+        )}
+        {renderDots()}
       </div>
     );
 };

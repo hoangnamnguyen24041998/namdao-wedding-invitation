@@ -16,4 +16,6 @@
   animation-name: floatDown;
   animation-timing-function: ease-in;
   animation-fill-mode: forwards;
+  width: 1.2rem;
+  height: 1.2rem;
 }

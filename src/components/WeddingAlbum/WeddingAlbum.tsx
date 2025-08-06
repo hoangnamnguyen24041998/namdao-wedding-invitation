@@ -22,17 +22,17 @@ const { Title, Text } = Typography;
 
 const albumImages = [
   Img01,
-  Img02,
-  Img03,
-  Img04,
-  Img05,
-  Img06,
-  Img07,
-  Img08,
   Img09,
   Img10,
   Img11,
+  Img08,
+  Img07,
   Img12,
+  Img06,
+  Img05,
+  Img04,
+  Img02,
+  Img03,
 ];
 
 const WeddingAlbum = () => {

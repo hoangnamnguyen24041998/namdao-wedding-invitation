@@ -9,6 +9,7 @@ import ImgWedding02 from "./ImgWedding02.jpg";
 
 import Album01 from "./Album01.png";
 import ImgBgFlower from "./ImgBgFlower.png";
+import ImgBgLotus from "./ImgBgLotus.jpg";
 
 export {
   ImgWedding01,
@@ -21,5 +22,6 @@ export {
   Album01,
   ImgWedding02,
   ImgBgFlower,
+  ImgBgLotus,
 };
 export * from "./album";

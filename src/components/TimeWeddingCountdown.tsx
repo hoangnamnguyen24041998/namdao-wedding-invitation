@@ -1,8 +1,7 @@
 import { Row, Typography } from "antd";
 import dayjs from "dayjs";
 import { useEffect, useState } from "react";
-import { ImgWedding01, Logo } from "../assets";
-import { ReactSVG } from "react-svg";
+import { ImgWedding01 } from "../assets";
 import YouTubeAudioPlayer from "./playSound";
 
 function TimeWeddingCountdown() {
@@ -16,7 +15,7 @@ function TimeWeddingCountdown() {
 
   useEffect(() => {
     const img = new Image();
-    img.src = ImgWedding01;
+    img.src = ImgWedding01; // Preload the image
     img.onload = () => setBgLoaded(true);
   }, []);
 
@@ -59,6 +58,7 @@ function TimeWeddingCountdown() {
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
+        backgroundColor: "#000", // Fallback color while loading
         transition: "opacity 1s ease-in-out",
         opacity: bgLoaded ? 1 : 0.5,
         filter: bgLoaded ? "none" : "blur(10px)",
@@ -67,18 +67,6 @@ function TimeWeddingCountdown() {
       <div className="absolute inset-0 bg-black opacity-40 z-0" />
       <div className="relative z-10 flex flex-col items-center justify-center px-4 pt-20 pb-10 text-center">
         <Row justify="center" align="middle" className="gap-x-4 mt-6">
-          <ReactSVG
-            src={Logo}
-            style={{
-              color: "#ffffff",
-              position: "absolute",
-              top: 0,
-              left: 0,
-              backgroundColor: "transparent",
-              transition: "transform 0.5s ease-in-out",
-              zIndex: 9999,
-            }}
-          />
           <div
             style={{
               position: "fixed",
@@ -100,25 +88,16 @@ function TimeWeddingCountdown() {
           <br />&<br />
           Hoàng Nam
         </Typography.Title>
-
-        <Typography.Title
-          level={2}
-          className="text-base sm:text-lg md:text-xl lg:text-2xl mt-4 font-semibold leading-snug"
-          style={{ color: "#ffffff" }}
-        >
-          {dayjs("2025-10-11").format("DD [THÁNG] MM YYYY")}
-        </Typography.Title>
-
-        <div className="mt-10 w-full max-w-md px-2">
-          <div className="flex flex-row justify-between items-center gap-2 sm:gap-4 md:gap-6">
+        <div className="mt-5 w-full max-w-md px-2">
+          <div className="flex flex-row justify-center items-center gap-1 sm:gap-2 md:gap-2 lg:gap-4">
             {values.map((element, index) => (
               <div
                 key={`circle-${index}`}
-                className="bg-[#F4146E90] rounded-full shadow-lg flex items-center justify-center
-                w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 p-2 sm:p-3 shrink-0"
+                className="bg-[#F4146E95] rounded-full shadow-lg flex items-center justify-center
+                w-18 h-18 sm:w-20 sm:h-20 md:w-24 md:h-24 p-2 sm:p-3 shrink-0"
               >
                 <Typography.Text
-                  className="text-center text-xs sm:text-sm md:text-base font-semibold leading-tight"
+                  className="text-center text-2xl sm:text-2xl md:text-base font-semibold leading-tight"
                   style={{ color: "#ffffff" }}
                 >
                   {element}
@@ -129,6 +108,13 @@ function TimeWeddingCountdown() {
             ))}
           </div>
         </div>
+        <Typography.Title
+          level={2}
+          className="text-base sm:text-lg md:text-xl lg:text-2xl mt-4 font-semibold leading-snug"
+          style={{ color: "#ffffff" }}
+        >
+          {dayjs("2025-10-11").format("DD [THÁNG] MM YYYY")}
+        </Typography.Title>
       </div>
     </div>
   );
