@@ -1,7 +1,7 @@
 import { Typography } from "antd";
 import dayjs from "dayjs";
 import { useEffect, useState } from "react";
-import { ImgWedding01 } from "../assets";
+import { ImgWedding01 } from "../assets"; // Add a low-res placeholder image
 
 function TimeWeddingCountdown() {
   const targetDates = [
@@ -18,7 +18,7 @@ function TimeWeddingCountdown() {
     seconds: 0,
   });
   const [bgLoaded, setBgLoaded] = useState(false);
-  const [bgImage, setBgImage] = useState(null);
+  const [bgImage, setBgImage] = useState();
 
   useEffect(() => {
     const img = new Image();
@@ -28,7 +28,6 @@ function TimeWeddingCountdown() {
       setBgLoaded(true);
     };
     img.onerror = () => {
-      // Handle error if needed
       setBgLoaded(true); // Fallback to loaded state
     };
   }, []);
