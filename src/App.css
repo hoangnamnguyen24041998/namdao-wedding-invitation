@@ -1,0 +1,36 @@
+@import "tailwindcss";
+@import "@fontsource/great-vibes";
+
+#root {
+  max-width: 1280px;
+}
+
+body{
+    margin: 0 auto;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Great Vibes";
+}
+
+.pulse {
+  animation: pulse-animation 5s infinite;
+}
+
+@keyframes pulse-animation {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.no-hover:hover,
+.no-hover:active,
+.no-hover:focus {
+  background-color: transparent !important;
+  box-shadow: none !important;
+}

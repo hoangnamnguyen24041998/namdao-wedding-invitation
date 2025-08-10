@@ -1,0 +1,13 @@
+.ant-image-preview-operations {
+  top: 40px !important;
+  right: 40px !important;
+}
+
+.ant-image-preview-img-wrapper {
+  pointer-events: none !important;
+}
+
+.ant-image-preview-img {
+  user-select: none !important;
+  pointer-events: none !important;
+}
