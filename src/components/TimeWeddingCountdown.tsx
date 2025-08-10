@@ -18,11 +18,19 @@ function TimeWeddingCountdown() {
     seconds: 0,
   });
   const [bgLoaded, setBgLoaded] = useState(false);
+  const [bgImage, setBgImage] = useState(null);
 
   useEffect(() => {
     const img = new Image();
     img.src = ImgWedding01; // Preload the image
-    img.onload = () => setBgLoaded(true);
+    img.onload = () => {
+      setBgImage(ImgWedding01 as any);
+      setBgLoaded(true);
+    };
+    img.onerror = () => {
+      // Handle error if needed
+      setBgLoaded(true); // Fallback to loaded state
+    };
   }, []);
 
   useEffect(() => {
@@ -64,7 +72,7 @@ function TimeWeddingCountdown() {
         bgLoaded ? "opacity-100" : "opacity-0"
       }`}
       style={{
-        backgroundImage: `url(${ImgWedding01})`,
+        backgroundImage: bgLoaded ? `url(${bgImage})` : "none",
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
