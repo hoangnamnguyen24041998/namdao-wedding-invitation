@@ -60,7 +60,7 @@ function TimeWeddingCountdown() {
 
   return (
     <div
-      className={`w-screen h-auto min-h-[100vh] bg-center bg-no-repeat relative overflow-hidden transition-opacity duration-1000 ${
+      className={`w-screen h-auto min-h-[100vh] bg-center bg-no-repeat relative overflow-hidden transition-opacity duration-500 ${
         bgLoaded ? "opacity-100" : "opacity-0"
       }`}
       style={{
@@ -69,8 +69,6 @@ function TimeWeddingCountdown() {
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
         backgroundColor: "#000", // Fallback color while loading
-        transition: "opacity 1s ease-in-out",
-        opacity: bgLoaded ? 1 : 0.5,
         filter: bgLoaded ? "none" : "blur(10px)",
       }}
     >
