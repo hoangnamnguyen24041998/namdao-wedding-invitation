@@ -10,6 +10,8 @@ import ImgWedding02 from "./ImgWedding02.jpg";
 import Album01 from "./Album01.png";
 import ImgBgFlower from "./ImgBgFlower.png";
 import ImgBgLotus from "./ImgBgLotus.jpg";
+import QR_XD from "./QR_XD.JPG";
+import QR_HN from "./QR_HN.JPG";
 
 export {
   ImgWedding01,
@@ -23,5 +25,7 @@ export {
   ImgWedding02,
   ImgBgFlower,
   ImgBgLotus,
+  QR_XD,
+  QR_HN,
 };
 export * from "./album";

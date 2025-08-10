@@ -119,7 +119,7 @@ function Event() {
   };
 
   return (
-    <div className="w-full bg-cover bg-center bg-no-repeat relative overflow-visible px-4 sm:px-6 md:px-10 lg:px-20 py-10">
+    <div className="w-full bg-cover bg-center bg-no-repeat relative overflow-visible px-4 sm:px-6 md:px-10 lg:px-20 py-10 w-full">
       <div
         className="bg-transparent rounded-xl p-8 flex flex-col items-center text-center"
         style={{
@@ -128,6 +128,7 @@ function Event() {
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
           objectFit: "cover",
+          width: "100%",
         }}
       >
         <Typography.Title

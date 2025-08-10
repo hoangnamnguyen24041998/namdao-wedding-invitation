@@ -1,8 +1,7 @@
 import { useEffect, useRef, useState } from "react";
-import { Sound } from "../assets";
 
-const YouTubeAudioPlayer = () => {
-  const audioRef = useRef<HTMLAudioElement>(new Audio(Sound));
+const useAudioPlayer = (sound: string) => {
+  const audioRef = useRef<HTMLAudioElement>(new Audio(sound));
   const [isPlaying, setIsPlaying] = useState(false);
 
   useEffect(() => {
@@ -23,7 +22,6 @@ const YouTubeAudioPlayer = () => {
       }
     };
 
-    // Attempt autoplay initially
     attemptAutoplay();
 
     const handleScroll = async () => {
@@ -47,9 +45,9 @@ const YouTubeAudioPlayer = () => {
       window.removeEventListener("scroll", handleScroll);
       window.removeEventListener("click", handleScroll);
     };
-  }, [isPlaying]);
+  }, [isPlaying, sound]);
 
-  return <></>;
+  return { isPlaying, audioRef };
 };
 
-export default YouTubeAudioPlayer;
+export default useAudioPlayer;

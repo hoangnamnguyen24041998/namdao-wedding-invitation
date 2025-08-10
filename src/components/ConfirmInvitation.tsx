@@ -1,10 +1,9 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Form, Input, Radio, Button, Typography, message } from "antd";
 import { ImgBG } from "../assets";
 import { useS } from "use-s-react";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import { useEffect } from "react";
 
 const { Title } = Typography;
 
@@ -24,7 +23,6 @@ const ConfirmInvitation = () => {
   }, []);
 
   const FORM_ID = "1FAIpQLSdGOYUlrGi4yXccmV59ED645X-KuJANTFmaZb4Ry3Xqw1boMw";
-
   const GOOGLE_FORM_ACTION = `https://docs.google.com/forms/u/0/d/e/${FORM_ID}/formResponse`;
 
   const GOOGLE_FORM_FIELDS = {
@@ -62,10 +60,11 @@ const ConfirmInvitation = () => {
         backgroundImage: `url(${ImgBG})`,
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
+        backgroundSize: "cover",
       }}
       data-aos="fade-in"
     >
-      <div className="bg-white p-6 sm:p-8 rounded-xl shadow-2xl w-full max-w-md">
+      <div className="bg-white p-6 sm:p-8 rounded-xl shadow-2xl w-full max-w-lg">
         <Title level={3} className="text-center text-pink-600 mb-6">
           Xác nhận tham dự
         </Title>

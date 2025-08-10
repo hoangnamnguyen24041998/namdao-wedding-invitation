@@ -9,7 +9,7 @@ const HeartRain = ({ isShown = true }: { isShown: boolean }) => {
   useEffect(() => {
     if (!isShown) return;
 
-    const interval = setInterval(() => {
+    const generateHeart = () => {
       const left = Math.random() * 100;
       const size = 1 + Math.random() * 2.5;
 
@@ -28,7 +28,9 @@ const HeartRain = ({ isShown = true }: { isShown: boolean }) => {
       setTimeout(() => {
         setHearts((prev) => prev.filter((h) => h.id !== id));
       }, 5000);
-    }, 1200);
+    };
+
+    const interval = setInterval(generateHeart, 800);
 
     return () => clearInterval(interval);
   }, [isShown]);

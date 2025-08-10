@@ -84,7 +84,7 @@ const ListWishes = () => {
 
   if (submissions.length > 0)
     return (
-      <div className="w-full max-w-md mx-auto py-10 px-4">
+      <div className="w-full max-w-lg mx-auto py-10 px-4">
         <Typography.Title
           level={3}
           className="text-center text-white mb-6"
@@ -94,7 +94,7 @@ const ListWishes = () => {
         </Typography.Title>
         <div
           ref={scrollRef}
-          className="max-h-96 overflow-y-auto space-y-4 px-2"
+          className="max-h-[400px] md:max-h-[500px] overflow-y-auto space-y-4 px-2"
           onScroll={handleScroll} // Detect user scroll
         >
           {submissions.slice(index, index + 1).map((wish: any, i: number) => (
