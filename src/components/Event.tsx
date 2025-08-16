@@ -8,21 +8,25 @@ import "aos/dist/aos.css";
 const listData = [
   {
     id: 1,
-    nameEvent: "Tiệc cưới nhà trai",
-    placeEventName: "Tư gia nhà trai",
-    placeEventAddress: "Xã Đức Hoà Hạ, Huyện Đức Hoà, Tỉnh Long An",
-    timeWelcome: "10:00",
-    timeEvent: "11:00",
-    dateEvent: "Thứ hai, 11.10.25",
-  },
-  {
-    id: 2,
     nameEvent: "Tiệc cưới nhà gái",
     placeEventName: "Tư gia nhà gái",
     placeEventAddress: "Xã Tân Phú, Huyện Thanh Bình, Tỉnh Đòng Tháp",
     timeWelcome: "17:00",
     timeEvent: "18:00",
-    dateEvent: "Thứ ba, 01.11.25",
+    dateEvent: "Thứ ba, 01.11.2025",
+    latitude: 10.5848,
+    longitude: 105.50692,
+  },
+  {
+    id: 2,
+    nameEvent: "Tiệc cưới nhà trai",
+    placeEventName: "Tư gia nhà trai",
+    placeEventAddress: "Xã Đức Hoà Hạ, Huyện Đức Hoà, Tỉnh Long An",
+    timeWelcome: "10:00",
+    timeEvent: "11:00",
+    dateEvent: "Thứ hai, 11.10.2025",
+    latitude: 10.80767,
+    longitude: 106.46492,
   },
   {
     id: 3,
@@ -31,7 +35,9 @@ const listData = [
     placeEventAddress: "Gold Palace, 973 Nơ Trang Long, Quận Bình Thạnh",
     timeWelcome: "10:00",
     timeEvent: "11:00",
-    dateEvent: "Thứ tư, 09.11.25",
+    dateEvent: "Thứ tư, 09.11.2025",
+    latitude: 10.81931621520912,
+    longitude: 106.70107302310292,
   },
 ];
 
@@ -89,6 +95,10 @@ const CardEvent = ({
 function Event() {
   const [selectedLocation, setSelectedLocation] = useState<string | null>(null);
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [selectedCoords, setSelectedCoords] = useState<{
+    lat: number;
+    lng: number;
+  } | null>(null);
 
   useEffect(() => {
     AOS.init({
@@ -97,8 +107,8 @@ function Event() {
     });
   }, []);
 
-  const handleOpenMap = (address: string) => {
-    setSelectedLocation(address);
+  const handleOpenMap = (lat: number, lng: number) => {
+    setSelectedCoords({ lat, lng });
     setIsModalVisible(true);
   };
 
@@ -108,11 +118,10 @@ function Event() {
   };
 
   const handleOpenDirections = () => {
-    if (selectedLocation) {
+    if (selectedCoords) {
+      const { lat, lng } = selectedCoords;
       window.open(
-        `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(
-          selectedLocation
-        )}`,
+        `https://www.google.com/maps/dir/?api=1&destination=${lat},${lng}`,
         "_blank"
       );
     }
@@ -160,7 +169,7 @@ function Event() {
               <CardEvent
                 data={item}
                 onClick={() => setSelectedLocation(item.placeEventAddress)}
-                onOpenMap={() => handleOpenMap(item.placeEventAddress)}
+                onOpenMap={() => handleOpenMap(item.latitude, item.longitude)}
               />
             </Fragment>
           ))}
@@ -175,9 +184,7 @@ function Event() {
         width={800}
       >
         <iframe
-          src={`https://www.google.com/maps?q=${encodeURIComponent(
-            selectedLocation || ""
-          )}&output=embed`}
+          src={`https://www.google.com/maps?q=${selectedCoords?.lat},${selectedCoords?.lng}&output=embed`}
           width="100%"
           height="400"
           style={{ border: 0 }}
