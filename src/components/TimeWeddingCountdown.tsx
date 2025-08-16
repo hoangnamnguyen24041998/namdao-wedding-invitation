@@ -1,15 +1,17 @@
 import { Typography } from "antd";
 import dayjs from "dayjs";
-import { useEffect, useState } from "react";
-import { ImgWedding01 } from "../assets"; // Add a low-res placeholder image
+import { useEffect, useMemo, useState, useRef } from "react";
+import { ImgWedding01 } from "../assets";
 
 function TimeWeddingCountdown() {
-  const targetDates = [
-    dayjs("2025-10-11T00:00:00"),
-    dayjs("2026-11-01T00:00:00"),
-    dayjs("2027-11-09T00:00:00"),
-  ];
-
+  const targetDates = useMemo(() => {
+    return [
+      dayjs("2025-10-11T00:00:00"),
+      dayjs("2026-11-01T00:00:00"),
+      dayjs("2027-11-09T00:00:00"),
+    ];
+  }, []);
+  const containerRef = useRef<HTMLDivElement>(null);
   const [currentTargetIndex, setCurrentTargetIndex] = useState(0);
   const [timeLeft, setTimeLeft] = useState({
     days: 0,
@@ -21,17 +23,30 @@ function TimeWeddingCountdown() {
   const [bgImage, setBgImage] = useState();
 
   useEffect(() => {
-    const img = new Image();
-    img.src = ImgWedding01; // Preload the image
-    img.onload = () => {
-      setBgImage(ImgWedding01 as any);
-      setBgLoaded(true);
-    };
-    img.onerror = () => {
-      setBgLoaded(true); // Fallback to loaded state
-    };
-  }, []);
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          const img = new Image();
+          img.src = ImgWedding01;
+          img.onload = () => {
+            setBgImage(ImgWedding01 as any);
+            setBgLoaded(true);
+          };
+          img.onerror = () => {
+            setBgLoaded(true);
+          };
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.1 }
+    );
 
+    if (containerRef.current) {
+      observer.observe(containerRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
   useEffect(() => {
     const updateCountdown = () => {
       const targetDate = targetDates[currentTargetIndex];
@@ -55,7 +70,7 @@ function TimeWeddingCountdown() {
     const intervalId = setInterval(updateCountdown, 1000);
 
     return () => clearInterval(intervalId);
-  }, [currentTargetIndex]);
+  }, [currentTargetIndex, targetDates]);
 
   const labels = ["Ngày", "Giờ", "Phút", "Giây"];
   const values = [
@@ -67,6 +82,7 @@ function TimeWeddingCountdown() {
 
   return (
     <div
+      ref={containerRef}
       className={`w-screen h-auto min-h-[100vh] bg-center bg-no-repeat relative overflow-hidden transition-opacity duration-500 ${
         bgLoaded ? "opacity-100" : "opacity-0"
       }`}
@@ -75,7 +91,7 @@ function TimeWeddingCountdown() {
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
-        backgroundColor: "#000", // Fallback color while loading
+        backgroundColor: "#000",
         filter: bgLoaded ? "none" : "blur(10px)",
       }}
     >

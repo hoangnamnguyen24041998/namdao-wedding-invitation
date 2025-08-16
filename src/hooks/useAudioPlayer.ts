@@ -1,19 +1,31 @@
 import { useEffect, useRef, useState } from "react";
 
 const useAudioPlayer = (sound: string) => {
-  const audioRef = useRef<HTMLAudioElement>(new Audio(sound));
+  const audioRef = useRef<HTMLAudioElement | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
 
   useEffect(() => {
-    const audio = audioRef.current;
-    audio.loop = true;
-
+    // Define handlers first
     const handlePlay = () => setIsPlaying(true);
     const handlePause = () => setIsPlaying(false);
+
+    // Clean up previous audio
+    if (audioRef.current) {
+      audioRef.current.pause();
+      audioRef.current.currentTime = 0;
+      audioRef.current.removeEventListener("play", handlePlay);
+      audioRef.current.removeEventListener("pause", handlePause);
+    }
+
+    // Create new audio instance
+    const audio = new Audio(sound);
+    audio.loop = true;
+    audioRef.current = audio;
 
     audio.addEventListener("play", handlePlay);
     audio.addEventListener("pause", handlePause);
 
+    // Attempt autoplay
     const attemptAutoplay = async () => {
       try {
         await audio.play();
@@ -24,28 +36,12 @@ const useAudioPlayer = (sound: string) => {
 
     attemptAutoplay();
 
-    const handleScroll = async () => {
-      if (!isPlaying) {
-        try {
-          await audio.play();
-          setIsPlaying(true);
-        } catch (error) {
-          console.error("Failed to play on scroll:", error);
-        }
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    window.addEventListener("click", handleScroll);
-
     return () => {
       audio.pause();
       audio.removeEventListener("play", handlePlay);
       audio.removeEventListener("pause", handlePause);
-      window.removeEventListener("scroll", handleScroll);
-      window.removeEventListener("click", handleScroll);
     };
-  }, [isPlaying, sound]);
+  }, [sound]);
 
   return { isPlaying, audioRef };
 };

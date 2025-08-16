@@ -11,6 +11,7 @@ import ListWishes from "./components/ListWishes/ListWishes";
 import useAudioPlayer from "./hooks/useAudioPlayer";
 import { QR_HN, QR_XD, Sound } from "./assets";
 import { useEffect, useState } from "react";
+import PlayBackAudio from "./components/playAudio/PlayAudio";
 
 function App() {
   useAudioPlayer(Sound);
@@ -43,6 +44,17 @@ function App() {
   return (
     <ConfigProvider>
       <Col>
+        <div
+          style={{
+            position: "fixed",
+            top: "0",
+            right: "0.5rem",
+            zIndex: 1000,
+            borderRadius: "50%",
+          }}
+        >
+          <PlayBackAudio />
+        </div>
         <HeartRain isShown />
         <TimeWeddingCountdown />
         <div className="flex flex-row justify-center items-center w-screen h-auto relative overflow-visible">
