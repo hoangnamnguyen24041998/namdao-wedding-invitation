@@ -3,11 +3,11 @@ import useAudioPlayer from "../../hooks/useAudioPlayer";
 import "./index.css";
 import { Button } from "antd";
 
-const PlayBackAudio = () => {
-  const { isPlaying, audioRef } = useAudioPlayer(Sound);
+const PlayBackAudio = ({ triggerRef }: any) => {
+  const { isPlaying } = useAudioPlayer(Sound, triggerRef);
 
   const togglePlayback = () => {
-    const audio = audioRef.current;
+    const audio = triggerRef.current;
     if (!audio) return;
 
     if (audio.paused) {
@@ -28,7 +28,7 @@ const PlayBackAudio = () => {
         style={{
           backgroundColor: "#fefefe90",
           border: "none",
-          transition: "all 0.5s ease",
+          transition: "all 0.2s ease",
         }}
       >
         {isPlaying ? "⏸" : "▶️"}
