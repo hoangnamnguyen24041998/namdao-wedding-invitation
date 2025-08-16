@@ -10,8 +10,8 @@ import ImgWedding02 from "./ImgWedding02.jpg";
 import Album01 from "./Album01.png";
 import ImgBgFlower from "./ImgBgFlower.png";
 import ImgBgLotus from "./ImgBgLotus.jpg";
-import QR_XD from "./QR_XD.JPG";
-import QR_HN from "./QR_HN.JPG";
+import QR_XD from "./QR_XD.png";
+import QR_HN from "./QR_HN.png";
 
 export {
   ImgWedding01,

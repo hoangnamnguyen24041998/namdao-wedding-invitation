@@ -1,47 +1,50 @@
 import { useEffect, useRef, useState } from "react";
 
-const useAudioPlayer = (sound: string) => {
+const useAudioPlayer = (
+  sound: string,
+  triggerRef: React.RefObject<HTMLElement>
+) => {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
+  const hasPlayed = useRef(false);
 
   useEffect(() => {
-    // Define handlers first
-    const handlePlay = () => setIsPlaying(true);
-    const handlePause = () => setIsPlaying(false);
-
-    // Clean up previous audio
-    if (audioRef.current) {
-      audioRef.current.pause();
-      audioRef.current.currentTime = 0;
-      audioRef.current.removeEventListener("play", handlePlay);
-      audioRef.current.removeEventListener("pause", handlePause);
-    }
-
-    // Create new audio instance
     const audio = new Audio(sound);
     audio.loop = true;
     audioRef.current = audio;
 
+    const handlePlay = () => setIsPlaying(true);
+    const handlePause = () => setIsPlaying(false);
+
     audio.addEventListener("play", handlePlay);
     audio.addEventListener("pause", handlePause);
 
-    // Attempt autoplay
-    const attemptAutoplay = async () => {
+    const triggerPlay = async () => {
+      if (hasPlayed.current || !audio.paused) return;
+      hasPlayed.current = true;
       try {
         await audio.play();
-      } catch (error) {
-        console.log("Autoplay was prevented. Waiting for user interaction.");
+        console.log("Audio started");
+      } catch (err) {
+        console.error("Audio play failed:", err);
       }
     };
 
-    attemptAutoplay();
+    const handleClick = (e: MouseEvent) => {
+      if (triggerRef.current?.contains(e.target as Node)) {
+        triggerPlay();
+      }
+    };
+
+    window.addEventListener("click", handleClick, { once: true });
 
     return () => {
       audio.pause();
       audio.removeEventListener("play", handlePlay);
       audio.removeEventListener("pause", handlePause);
+      window.removeEventListener("click", handleClick);
     };
-  }, [sound]);
+  }, [sound, triggerRef]);
 
   return { isPlaying, audioRef };
 };

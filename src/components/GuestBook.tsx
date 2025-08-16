@@ -76,20 +76,28 @@ const GuestbookForm = () => {
         </div>
         <Form form={form} layout="vertical" onFinish={handleSubmit}>
           <Form.Item
-            label="Tên của bạn"
+            label={
+              <span className="font-semibold text-base sm:text-lg text-gray-800">
+                Tên của bạn
+              </span>
+            }
             name="name"
             rules={[{ required: true, message: "Vui lòng nhập tên của bạn" }]}
           >
             <Input placeholder="Nhập tên của bạn" />
           </Form.Item>
+
           <Form.Item
-            label="Lời chúc của bạn"
+            label={
+              <span className="font-semibold text-base sm:text-lg text-gray-800">
+                Lời chúc của bạn
+              </span>
+            }
             name="wish"
             rules={[{ required: true, message: "Vui lòng nhập lời chúc" }]}
           >
             <Input.TextArea rows={4} placeholder="Nhập lời chúc của bạn" />
           </Form.Item>
-
           <Form.Item>
             <Button
               type="primary"

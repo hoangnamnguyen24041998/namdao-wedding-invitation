@@ -85,7 +85,7 @@ function TimeWeddingCountdown() {
   return (
     <div
       ref={containerRef}
-      className={`w-screen h-auto min-h-[100vh] bg-center bg-no-repeat relative overflow-hidden transition-opacity duration-500 ${
+      className={`w-screen min-h-screen bg-center bg-no-repeat relative overflow-hidden transition-opacity duration-500 ${
         bgLoaded ? "opacity-100" : "opacity-0"
       }`}
       style={{
@@ -101,28 +101,33 @@ function TimeWeddingCountdown() {
       <div className="relative z-10 flex flex-col items-center justify-center px-4 pt-20 pb-10 text-center">
         <Typography.Title
           level={1}
-          className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl xl:text-9xl font-extrabold leading-tight mt-28"
-          style={{ color: "#ffffff", fontFamily: "'Great Vibes', cursive" }}
+          className="text-white font-[Great_Vibes] font-extrabold leading-tight mt-28 text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-[8rem] 2xl:text-[10rem]"
+          style={{
+            color: "white",
+            fontSize: "3.5rem",
+            fontFamily: "Great Vibes",
+          }}
         >
           Xuân Đào
           <br />&<br />
           Hoàng Nam
         </Typography.Title>
         <div className="mt-5 w-full max-w-md px-2">
-          <div className="flex flex-row justify-center items-center gap-2 sm:gap-4 md:gap-6 lg:gap-8">
+          <div className="flex justify-center items-center gap-2 sm:gap-6 md:gap-8 lg:gap-10 xl:gap-12 2xl:gap-16">
             {values.map((element, index) => (
               <div
                 key={`circle-${index}`}
-                className="bg-[#F4146E95] rounded-full shadow-lg flex items-center justify-center
-                w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 p-3 sm:p-4 shrink-0"
+                className="bg-[#F4146E95] rounded-full shadow-lg flex items-center justify-center w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 lg:w-32 lg:h-32 xl:w-36 xl:h-36 p-4 shrink-0"
               >
                 <Typography.Text
-                  className="text-center text-2xl sm:text-3xl md:text-4xl font-semibold leading-tight"
-                  style={{ color: "#ffffff" }}
+                  className="text-white text-center font-semibold leading-tight text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl"
+                  style={{ color: "white", fontSize: "1.8rem" }}
                 >
                   {element}
                   <br />
-                  {labels[index]}
+                  <span className="block text-white text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl">
+                    {labels[index]}
+                  </span>
                 </Typography.Text>
               </div>
             ))}
@@ -130,8 +135,8 @@ function TimeWeddingCountdown() {
         </div>
         <Typography.Title
           level={2}
-          className="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl mt-4 font-semibold leading-snug"
-          style={{ color: "#ffffff" }}
+          className="text-white font-bold mt-10 tracking-wide text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl"
+          style={{ color: "white" }}
         >
           {dayjs(targetDates[currentTargetIndex]).format("DD [THÁNG] MM YYYY")}
         </Typography.Title>

@@ -14,6 +14,7 @@ export default {
       },
       animation: {
         "fade-in": "fade-in 0.8s ease-out forwards",
+        pulse: "pulse 2s infinite",
       },
     },
   },
