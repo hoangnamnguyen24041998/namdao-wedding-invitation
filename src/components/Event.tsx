@@ -93,7 +93,6 @@ const CardEvent = ({
 };
 
 function Event() {
-  const [selectedLocation, setSelectedLocation] = useState<string | null>(null);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [selectedCoords, setSelectedCoords] = useState<{
     lat: number;
@@ -114,7 +113,7 @@ function Event() {
 
   const handleCloseModal = () => {
     setIsModalVisible(false);
-    setSelectedLocation(null);
+    setSelectedCoords(null);
   };
 
   const handleOpenDirections = () => {
@@ -168,7 +167,9 @@ function Event() {
             <Fragment key={item.id} data-aos="zoom-in">
               <CardEvent
                 data={item}
-                onClick={() => setSelectedLocation(item.placeEventAddress)}
+                onClick={() =>
+                  setSelectedCoords({ lat: item.latitude, lng: item.longitude })
+                }
                 onOpenMap={() => handleOpenMap(item.latitude, item.longitude)}
               />
             </Fragment>
