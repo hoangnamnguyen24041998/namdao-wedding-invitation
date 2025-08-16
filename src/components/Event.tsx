@@ -173,7 +173,7 @@ function Event() {
           ...tình yêu không phải là nhìn vào nhau, mà là nhìn về chung một
           hướng...
         </Typography.Text>
-        <div className="mt-8 w-full flex flex-wrap justify-center items-stretch gap-6">
+        <div className="mt-8 w-full flex flex-wrap justify-center items-stretch gap-2">
           {listData.map((item) => (
             <Fragment key={item.id} data-aos="zoom-in">
               <CardEvent
