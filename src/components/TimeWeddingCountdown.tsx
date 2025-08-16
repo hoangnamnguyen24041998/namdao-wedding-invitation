@@ -11,6 +11,7 @@ function TimeWeddingCountdown() {
       dayjs("2027-11-09T00:00:00"),
     ];
   }, []);
+
   const containerRef = useRef<HTMLDivElement>(null);
   const [currentTargetIndex, setCurrentTargetIndex] = useState(0);
   const [timeLeft, setTimeLeft] = useState({
@@ -47,6 +48,7 @@ function TimeWeddingCountdown() {
 
     return () => observer.disconnect();
   }, []);
+
   useEffect(() => {
     const updateCountdown = () => {
       const targetDate = targetDates[currentTargetIndex];
