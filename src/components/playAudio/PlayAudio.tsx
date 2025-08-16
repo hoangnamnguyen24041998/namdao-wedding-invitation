@@ -26,10 +26,9 @@ const PlayBackAudio = () => {
         onClick={togglePlayback}
         className={isPlaying ? "pulse" : ""}
         style={{
-          backgroundColor: "#fefefe50",
+          backgroundColor: "#fefefe90",
           border: "none",
-          boxShadow: isPlaying ? "0 0 10px #F4146E" : "none",
-          transition: "all 0.3s ease",
+          transition: "all 0.5s ease",
         }}
       >
         {isPlaying ? "⏸" : "▶️"}
