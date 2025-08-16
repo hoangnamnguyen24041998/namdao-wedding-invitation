@@ -9,8 +9,9 @@ const MoneyBoxModal = ({ isModalVisible, toggleModal }: any) => {
       onCancel={toggleModal}
       footer={null}
     >
-      <div className="flex flex-col md:flex-row justify-between space-y-4 md:space-y-0 md:space-x-6">
-        <div className="money-box bg-white rounded-lg shadow-lg p-4 flex flex-col justify-between w-full md:w-[35rem]">
+      <div className="flex flex-col md:flex-row gap-6">
+        {/* Chú rể */}
+        <div className="money-box bg-white rounded-lg shadow-lg p-4 flex flex-col justify-between flex-1">
           <div className="text-content">
             <h3 className="text-2xl font-semibold">Mừng cưới đến chú rể</h3>
             <p className="text-sm">Ngân hàng: Vikki Digital Bank</p>
@@ -26,7 +27,8 @@ const MoneyBoxModal = ({ isModalVisible, toggleModal }: any) => {
           </div>
         </div>
 
-        <div className="money-box bg-white rounded-lg shadow-lg p-4 flex flex-col justify-between w-full md:w-[35rem]">
+        {/* Cô dâu */}
+        <div className="money-box bg-white rounded-lg shadow-lg p-4 flex flex-col justify-between flex-1">
           <div className="text-content">
             <h3 className="text-2xl font-semibold">Mừng cưới đến cô dâu</h3>
             <p className="text-sm">Ngân hàng: Sacombank</p>
