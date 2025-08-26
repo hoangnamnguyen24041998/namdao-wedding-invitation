@@ -27,7 +27,7 @@ const HeartRain = ({ isShown = true }: { isShown: boolean }) => {
 
       setTimeout(() => {
         setHearts((prev) => prev.filter((h) => h.id !== id));
-      }, 5000);
+      }, 8000);
     };
 
     const interval = setInterval(generateHeart, 800);

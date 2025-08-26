@@ -28,6 +28,8 @@ const ConfirmInvitation = () => {
   const GOOGLE_FORM_FIELDS = {
     name: "entry.1704380466",
     attendance: "entry.309234374",
+    quantity: "entry.1442013422",
+    side: "entry.1704380466",
   };
 
   const handleSubmit = async (values: any) => {
@@ -35,6 +37,8 @@ const ConfirmInvitation = () => {
     const formData = new FormData();
     formData.append(GOOGLE_FORM_FIELDS.name, values.name);
     formData.append(GOOGLE_FORM_FIELDS.attendance, values.attendance);
+    formData.append(GOOGLE_FORM_FIELDS.quantity, values.quantity);
+    formData.append(GOOGLE_FORM_FIELDS.side, values.side);
 
     try {
       await fetch(GOOGLE_FORM_ACTION, {
@@ -70,13 +74,38 @@ const ConfirmInvitation = () => {
         </Title>
         <Form form={form} layout="vertical" onFinish={handleSubmit}>
           <Form.Item
-            label="Họ tên"
+            label={
+              <span className="font-semibold text-base sm:text-lg text-gray-800">
+                Họ tên
+              </span>
+            }
             name="name"
             rules={[{ required: true, message: "Vui lòng nhập họ tên" }]}
           >
             <Input placeholder="Nhập họ tên của bạn" />
           </Form.Item>
+          <Form.Item
+            label={
+              <span className="font-semibold text-base sm:text-lg text-gray-800">
+                Số lượng người tham dự
+              </span>
+            }
+            name="quantity"
+            rules={[{ required: true, message: "Vui lòng nhập số lượng" }]}
+          >
+            <Input type="number" min={1} placeholder="Ví dụ: 2" />
+          </Form.Item>
 
+          <Form.Item
+            label="Bạn của"
+            name="side"
+            rules={[{ required: true, message: "Vui lòng chọn một lựa chọn" }]}
+          >
+            <Radio.Group>
+              <Radio value="Cô dâu">Cô dâu</Radio>
+              <Radio value="Chú rể">Chú rể</Radio>
+            </Radio.Group>
+          </Form.Item>
           <Form.Item
             label="Xác nhận tham dự"
             name="attendance"

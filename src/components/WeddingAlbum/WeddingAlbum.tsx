@@ -77,6 +77,7 @@ const WeddingAlbum = () => {
                   scaleStep: 0,
                 }}
                 data-aos="fade-up"
+                previewPrefixCls="custom-image-preview"
               />
             </div>
           ))}
