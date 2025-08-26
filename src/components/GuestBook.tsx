@@ -83,6 +83,7 @@ const GuestbookForm = () => {
             }
             name="name"
             rules={[{ required: true, message: "Vui lòng nhập tên của bạn" }]}
+            required={false}
           >
             <Input placeholder="Nhập tên của bạn" />
           </Form.Item>
@@ -95,6 +96,7 @@ const GuestbookForm = () => {
             }
             name="wish"
             rules={[{ required: true, message: "Vui lòng nhập lời chúc" }]}
+            required={false}
           >
             <Input.TextArea rows={4} placeholder="Nhập lời chúc của bạn" />
           </Form.Item>
@@ -104,6 +106,9 @@ const GuestbookForm = () => {
               htmlType="submit"
               loading={loading}
               className="w-full bg-pink-500 hover:bg-pink-600"
+              style={{
+                backgroundColor: "pink",
+              }}
             >
               Gửi lời chúc
             </Button>

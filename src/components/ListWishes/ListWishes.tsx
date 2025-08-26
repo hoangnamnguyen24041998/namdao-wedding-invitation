@@ -21,18 +21,16 @@ const ListWishes = () => {
   const [isAutoScrolling, setIsAutoScrolling] = useState(true);
   const scrollRef = useRef<HTMLDivElement>(null);
 
-  // Auto-scroll logic
   useEffect(() => {
     if (!isAutoScrolling) return;
 
     const interval = setInterval(() => {
       setIndex((prev) => (prev + 1) % submissions.length);
-    }, 2000);
+    }, 1000);
 
     return () => clearInterval(interval);
   }, [submissions, isAutoScrolling]);
 
-  // Scroll to bottom on index change
   useEffect(() => {
     if (scrollRef.current) {
       scrollRef.current.scrollTo({
@@ -42,7 +40,6 @@ const ListWishes = () => {
     }
   }, [index]);
 
-  // Keyboard navigation (optional)
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "ArrowLeft") {
@@ -125,7 +122,11 @@ const ListWishes = () => {
         </Typography.Title>
         <div className="flex items-center justify-center gap-4 w-full max-w-screen-md mx-auto">
           <div className="flex-shrink-0 self-stretch flex items-center">
-            <Button className="w-12 h-12" onClick={handlePrev}>
+            <Button
+              type="text"
+              className="w-12 h-12 p-0 bg-transparent hover:bg-transparent active:bg-transparent border-none shadow-none"
+              onClick={handlePrev}
+            >
               <ReactSVG src={IcLeft} className="w-6 h-6" />
             </Button>
           </div>
@@ -136,14 +137,21 @@ const ListWishes = () => {
                 key={`${wish.name}-${i}`}
                 className="h-full bg-white/10 backdrop-blur-md rounded-xl p-4 shadow-md text-white flex items-start gap-4"
               >
-                <Avatar src={`https://i.pravatar.cc/${i}`} />
+                <Avatar
+                  src={`https://i.pravatar.cc/${i}`}
+                  size={48}
+                  shape="circle"
+                  className="flex-shrink-0"
+                >
+                  {wish.name.charAt(0)}
+                </Avatar>
                 <div>
                   <Typography.Text className="font-semibold text-white">
                     {wish.name}
                   </Typography.Text>
                   <br />
-                  <Typography.Text className="text-gray-300">
-                    {wish.wish}
+                  <Typography.Text className="text-gray-300 whitespace-pre-line break-words">
+                    ›{wish.wish}
                   </Typography.Text>
                 </div>
               </div>
@@ -154,7 +162,11 @@ const ListWishes = () => {
             className="flex-shrink-0 self-stretch flex items-center"
             onClick={handleNext}
           >
-            <Button className="w-12 h-12">
+            <Button
+              type="text"
+              className="w-12 h-12 p-0 bg-transparent hover:bg-transparent active:bg-transparent border-none shadow-none"
+              onClick={handleNext}
+            >
               <ReactSVG src={IcRight} className="w-6 h-6" />
             </Button>
           </div>
