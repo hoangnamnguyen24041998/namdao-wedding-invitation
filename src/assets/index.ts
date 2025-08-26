@@ -12,6 +12,8 @@ import ImgBgFlower from "./ImgBgFlower.png";
 import ImgBgLotus from "./ImgBgLotus.jpg";
 import QR_XD from "./QR_XD.png";
 import QR_HN from "./QR_HN.png";
+import IcLeft from "./IcLeft.svg";
+import IcRight from "./IcRight.svg";
 
 export {
   ImgWedding01,
@@ -27,5 +29,7 @@ export {
   ImgBgLotus,
   QR_XD,
   QR_HN,
+  IcLeft,
+  IcRight,
 };
 export * from "./album";

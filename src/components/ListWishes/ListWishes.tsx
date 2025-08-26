@@ -5,6 +5,8 @@ import "aos/dist/aos.css";
 import "./index.css";
 import { useS } from "use-s-react";
 import Papa from "papaparse";
+import { ReactSVG } from "react-svg";
+import { IcLeft, IcRight } from "../../assets";
 
 const ListWishes = () => {
   useEffect(() => {
@@ -44,10 +46,8 @@ const ListWishes = () => {
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "ArrowLeft") {
-        setIsAutoScrolling(false);
         setIndex((prev) => (prev > 0 ? prev - 1 : submissions.length - 1));
       } else if (e.key === "ArrowRight") {
-        setIsAutoScrolling(false);
         setIndex((prev) => (prev + 1) % submissions.length);
       }
     };
@@ -99,19 +99,23 @@ const ListWishes = () => {
     </div>
   );
 
-  const handlePrev = () => {
+  const pauseAutoScroll = () => {
     setIsAutoScrolling(false);
+    setTimeout(() => setIsAutoScrolling(true), 500);
+  };
+
+  const handlePrev = () => {
+    pauseAutoScroll();
     setIndex((prev) => (prev > 0 ? prev - 1 : submissions.length - 1));
   };
 
   const handleNext = () => {
-    setIsAutoScrolling(false);
+    pauseAutoScroll();
     setIndex((prev) => (prev + 1) % submissions.length);
   };
-
   if (submissions.length > 0)
     return (
-      <div className="py-10 justify-center md:justify-center items-center md:items-center w-screen">
+      <div className="py-10 w-full px-4">
         <Typography.Title
           level={3}
           className="text-center text-white mb-6"
@@ -119,18 +123,18 @@ const ListWishes = () => {
         >
           💌 Lời chúc từ bạn bè
         </Typography.Title>
+        <div className="flex items-center justify-center gap-4 w-full max-w-screen-md mx-auto">
+          <div className="flex-shrink-0 self-stretch flex items-center">
+            <Button className="w-12 h-12" onClick={handlePrev}>
+              <ReactSVG src={IcLeft} className="w-6 h-6" />
+            </Button>
+          </div>
 
-        <div className="flex flex-row md:flex-row items-center md:items-center gap-4 justify-center md:justify-center">
-          <Button onClick={handlePrev} className="shrink-0 w-full md:w-auto">
-            ⬅️
-          </Button>
-
-          {/* Wish Content */}
-          <div className="w-2/4 mx-50">
+          <div className="flex-grow">
             {submissions.slice(index, index + 1).map((wish: any, i: number) => (
               <div
                 key={`${wish.name}-${i}`}
-                className="bg-white/10 backdrop-blur-md rounded-xl p-4 shadow-md text-white flex items-start gap-4"
+                className="h-full bg-white/10 backdrop-blur-md rounded-xl p-4 shadow-md text-white flex items-start gap-4"
               >
                 <Avatar src={`https://i.pravatar.cc/${i}`} />
                 <div>
@@ -146,13 +150,17 @@ const ListWishes = () => {
             ))}
           </div>
 
-          {/* Right Button */}
-          <Button onClick={handleNext} className="shrink-0 w-full md:w-auto">
-            ➡️
-          </Button>
+          <div
+            className="flex-shrink-0 self-stretch flex items-center"
+            onClick={handleNext}
+          >
+            <Button className="w-12 h-12">
+              <ReactSVG src={IcRight} className="w-6 h-6" />
+            </Button>
+          </div>
         </div>
 
-        {renderDots()}
+        <div className="mt-6">{renderDots()}</div>
       </div>
     );
 };
