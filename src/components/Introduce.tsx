@@ -38,7 +38,11 @@ function Introduce() {
               </Typography.Text>
               <br />
               <Typography.Text className="text-sm sm:text-base md:text-lg text-gray-600 italic">
-                người mang đến sự ấm áp và tiếng cười.
+                Chàng Lập trình viên đến từ TP.HCM ồn ào, náo nhiệt. Là một
+                người hiền lành và ít nói. Luôn coi trọng tình cảm và yêu thương
+                gia đình. Với anh: “Gia đình là điểm tựa vững chắc nhất và là
+                bến đỗ bình yên không đâu sánh bằng đối với mỗi con người. Đó
+                luôn là nơi tràn ngập tình yêu thương để ta trở về.”
               </Typography.Text>
             </div>
           </div>
@@ -65,7 +69,10 @@ function Introduce() {
               </Typography.Text>
               <br />
               <Typography.Text className="text-sm sm:text-base md:text-lg text-gray-600 italic">
-                người khiến mọi khoảnh khắc trở nên dịu dàng và đáng nhớ.
+                Nàng QC(Tester) đến từ mảnh đất sen hồng Đồng Tháp. Là một người
+                yêu gia đình. Là một người cẩn trọng, tận tâm và luôn cố gắng
+                giữ bình tĩnh trước mọi áp lực. "Gia đình là mái ấm che chở, là
+                nơi những lo toan được sẻ chia và những niềm vui được nhân lên”
               </Typography.Text>
             </div>
           </div>

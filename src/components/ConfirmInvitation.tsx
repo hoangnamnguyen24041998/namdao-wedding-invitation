@@ -76,7 +76,7 @@ const ConfirmInvitation = () => {
           <Form.Item
             label={
               <span className="font-semibold text-base sm:text-lg text-gray-800">
-                Họ tên
+                Tên khách mời
               </span>
             }
             name="name"
@@ -97,36 +97,45 @@ const ConfirmInvitation = () => {
           </Form.Item>
 
           <Form.Item
-            label="Bạn của"
+            label=""
             name="side"
             rules={[{ required: true, message: "Vui lòng chọn một lựa chọn" }]}
           >
             <Radio.Group>
-              <Radio value="Cô dâu">Cô dâu</Radio>
-              <Radio value="Chú rể">Chú rể</Radio>
+              <Radio value="Cô dâu">Khách của Cô dâu</Radio>
+              <Radio value="Chú rể">Khách của Chú rể</Radio>
             </Radio.Group>
           </Form.Item>
           <Form.Item
-            label="Xác nhận tham dự"
+            label={
+              <span className="font-semibold text-base sm:text-lg text-gray-800">
+                Xác nhận tham dự
+              </span>
+            }
             name="attendance"
             rules={[{ required: true, message: "Vui lòng chọn một lựa chọn" }]}
           >
             <Radio.Group>
-              <Radio value="Tham dự">Tham dự</Radio>
-              <Radio value="Không tham dự">Không tham dự</Radio>
+              <Radio value="Tham dự">Có, tôi sẽ tham dự</Radio>
+              <Radio value="Không tham dự">
+                Tôi bận, rất tiếc không thể tham dự
+              </Radio>
             </Radio.Group>
           </Form.Item>
 
-          <Form.Item>
-            <Button
-              type="primary"
-              htmlType="submit"
-              loading={loading}
-              className="w-full bg-pink-500 hover:bg-pink-600"
-            >
+          <Button
+            htmlType="submit"
+            loading={loading}
+            type="primary"
+            style={{
+              backgroundColor: "pink",
+            }}
+            className="w-full bg-pink-500 hover:bg-pink-600 text-white font-semibold border-none rounded-lg shadow-md transition duration-300 "
+          >
+            <span className="font-semibold text-base sm:text-lg text-gray-800 text-white">
               Xác nhận
-            </Button>
-          </Form.Item>
+            </span>
+          </Button>
         </Form>
       </div>
     </div>
