@@ -13,7 +13,6 @@ import {
   Img11,
   Img12,
 } from "../../assets";
-import "./index.css";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { useEffect } from "react";
@@ -39,8 +38,24 @@ const WeddingAlbum = () => {
   useEffect(() => {
     AOS.init({
       duration: 1000,
-      once: true,
+      once: false,
+      easing: "ease-in-out",
     });
+
+    const handleResize = () => {
+      AOS.refreshHard(); // more aggressive refresh
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    // Refresh after initial render
+    setTimeout(() => {
+      AOS.refreshHard();
+    }, 500);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
   }, []);
 
   return (
@@ -62,9 +77,9 @@ const WeddingAlbum = () => {
           {albumImages.map((src, index) => (
             <div
               key={index}
-              className="w-full animate-fade-in"
-              style={{ animationDelay: `${index * 100}ms` }}
+              className="w-full"
               data-aos="fade-up"
+              data-aos-delay={index * 100}
             >
               <Image
                 src={src}
@@ -76,7 +91,6 @@ const WeddingAlbum = () => {
                   movable: false,
                   scaleStep: 0,
                 }}
-                data-aos="fade-up"
                 previewPrefixCls="custom-image-preview"
               />
             </div>
