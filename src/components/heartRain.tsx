@@ -30,7 +30,7 @@ const HeartRain = ({ isShown = true }: { isShown: boolean }) => {
       }, 8000);
     };
 
-    const interval = setInterval(generateHeart, 800);
+    const interval = setInterval(generateHeart, 500);
 
     return () => clearInterval(interval);
   }, [isShown]);

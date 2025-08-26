@@ -128,7 +128,7 @@ const ConfirmInvitation = () => {
             loading={loading}
             type="primary"
             style={{
-              backgroundColor: "pink",
+              backgroundColor: "rgb(219, 39, 119)",
             }}
             className="w-full bg-pink-500 hover:bg-pink-600 text-white font-semibold border-none rounded-lg shadow-md transition duration-300 "
           >
