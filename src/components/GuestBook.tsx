@@ -105,12 +105,14 @@ const GuestbookForm = () => {
               type="primary"
               htmlType="submit"
               loading={loading}
-              className="w-full bg-pink-500 hover:bg-pink-600"
+              className="w-full bg-pink-600 hover:bg-pink-600"
               style={{
-                backgroundColor: "pink",
+                backgroundColor: "rgb(219, 39, 119)",
               }}
             >
-              Gửi lời chúc
+              <span className="font-semibold text-base sm:text-lg text-gray-800 text-white">
+                Gửi lời chúc
+              </span>
             </Button>
           </Form.Item>
         </Form>

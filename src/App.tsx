@@ -13,6 +13,7 @@ import PlayBackAudio from "./components/playAudio/PlayAudio";
 import MoneyBoxModal from "./components/MoneyBoxModal";
 import ThankYouCard from "./components/ThankYouCard/ThankYouCard";
 import AutoScrollMobile from "./components/AutoScrollMobile";
+import IntroMessage from "./components/IntroMessage";
 
 function App() {
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -55,6 +56,9 @@ function App() {
         </div>
         <div className="flex flex-row justify-center items-center w-screen h-auto relative overflow-visible">
           <WeddingAlbum />
+        </div>
+        <div className="flex flex-row justify-center items-center w-screen h-auto relative overflow-visible">
+          <IntroMessage />
         </div>
         <div className="flex flex-row justify-center items-center w-screen h-auto relative overflow-visible">
           <ConfirmInvitation />
