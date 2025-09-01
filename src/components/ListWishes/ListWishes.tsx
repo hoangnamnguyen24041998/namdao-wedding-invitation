@@ -150,8 +150,8 @@ const ListWishes = () => {
                     {wish.name}
                   </Typography.Text>
                   <br />
-                  <Typography.Text className="text-gray-300 whitespace-pre-line break-words">
-                    ›{wish.wish}
+                  <Typography.Text className="text-gray-300 line-clamp-2">
+                    {wish.wish}
                   </Typography.Text>
                 </div>
               </div>

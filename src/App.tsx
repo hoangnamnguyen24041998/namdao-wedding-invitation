@@ -9,7 +9,7 @@ import GuestbookForm from "./components/GuestBook";
 import ConfirmInvitation from "./components/ConfirmInvitation";
 import ListWishes from "./components/ListWishes/ListWishes";
 import { useRef, useState } from "react";
-import PlayBackAudio from "./components/playAudio/PlayAudio";
+import PlayBackAudio from "./components/PlayAudio/PlayAudio";
 import MoneyBoxModal from "./components/MoneyBoxModal";
 import ThankYouCard from "./components/ThankYouCard/ThankYouCard";
 import AutoScrollMobile from "./components/AutoScrollMobile";
@@ -17,7 +17,7 @@ import IntroMessage from "./components/IntroMessage";
 
 function App() {
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const triggerRef = useRef<HTMLDivElement>(null);
+  const audioRef = useRef<HTMLAudioElement>(null);
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -33,7 +33,7 @@ function App() {
 
   return (
     <ConfigProvider>
-      <Col ref={triggerRef}>
+      <Col ref={audioRef as any}>
         <AutoScrollMobile />
         <div
           style={{
@@ -44,7 +44,7 @@ function App() {
             borderRadius: "50%",
           }}
         >
-          <PlayBackAudio triggerRef={triggerRef} />
+          <PlayBackAudio triggerRef={audioRef as any} />
         </div>
         <HeartRain isShown />
         <TimeWeddingCountdown />
@@ -78,13 +78,12 @@ function App() {
           onClick={scrollToTop}
           style={{
             position: "fixed",
-
-            bottom: "160px",
+            bottom: "120px",
             right: "20px",
             zIndex: 1000,
-            backgroundColor: "#00000080",
-            height: "3.5rem",
-            width: "3.5rem",
+            backgroundColor: "#F08FFF80",
+            height: "2.5rem",
+            width: "2.5rem",
             fontSize: "1.5rem",
           }}
         >
@@ -95,12 +94,12 @@ function App() {
           onClick={scrollToBottom}
           style={{
             position: "fixed",
-            bottom: "90px",
+            bottom: "70px",
             right: "20px",
             zIndex: 1000,
-            backgroundColor: "#00000080",
-            height: "3.5rem",
-            width: "3.5rem",
+            backgroundColor: "#F08FFF80",
+            height: "2.5rem",
+            width: "2.5rem",
             borderRadius: 8,
             fontSize: "1.5rem",
           }}
@@ -116,15 +115,14 @@ function App() {
             right: "20px",
             zIndex: 1000,
             backgroundColor: "#F08FFF80",
-            height: "3.5rem",
-            width: "3.5rem",
+            height: "2.5rem",
+            width: "2.5rem",
             borderRadius: 1000,
             fontSize: "1.5rem",
           }}
         >
           $
         </Button>
-
         <MoneyBoxModal {...{ isModalVisible, toggleModal }} />
       </Col>
     </ConfigProvider>

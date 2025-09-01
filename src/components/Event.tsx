@@ -190,7 +190,7 @@ function Event() {
 
       <Modal
         title="Bản đồ địa điểm"
-        visible={isModalVisible}
+        open={isModalVisible}
         onCancel={handleCloseModal}
         footer={null}
         width={800}
