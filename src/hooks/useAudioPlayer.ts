@@ -1,19 +1,9 @@
-import { useEffect, useState } from "react";
+import { useLayoutEffect, useState } from "react";
 
-const useAudioPlayer = (
-  src: string,
-  triggerRef: React.RefObject<HTMLAudioElement>
-) => {
-  useEffect(() => {
-    const audio = triggerRef.current;
-    if (audio) {
-      audio.src = src;
-    }
-  }, [src, triggerRef]);
-
+const useAudioPlayer = (triggerRef: React.RefObject<HTMLAudioElement>) => {
   const [isPlaying, setIsPlaying] = useState(false);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const audio = triggerRef.current;
     if (!audio) return;
 

@@ -3,17 +3,17 @@ import "./App.css";
 import TimeWeddingCountdown from "./components/TimeWeddingCountdown";
 import Introduce from "./components/Introduce";
 import Event from "./components/Event";
-import { HeartRain } from "./components";
+import { HeartRain, PlayBackAudio } from "./components";
 import WeddingAlbum from "./components/WeddingAlbum/WeddingAlbum";
 import GuestbookForm from "./components/GuestBook";
 import ConfirmInvitation from "./components/ConfirmInvitation";
 import ListWishes from "./components/ListWishes/ListWishes";
-import { useRef, useState } from "react";
-import PlayBackAudio from "./components/PlayAudio/PlayAudio";
+import { useRef, useState, type RefObject } from "react";
 import MoneyBoxModal from "./components/MoneyBoxModal";
 import ThankYouCard from "./components/ThankYouCard/ThankYouCard";
 import AutoScrollMobile from "./components/AutoScrollMobile";
 import IntroMessage from "./components/IntroMessage";
+import { Sound } from "./assets";
 
 function App() {
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -33,7 +33,7 @@ function App() {
 
   return (
     <ConfigProvider>
-      <Col ref={audioRef as any}>
+      <Col>
         <AutoScrollMobile />
         <div
           style={{
@@ -44,7 +44,10 @@ function App() {
             borderRadius: "50%",
           }}
         >
-          <PlayBackAudio triggerRef={audioRef as any} />
+          <PlayBackAudio
+            triggerRef={audioRef as RefObject<HTMLAudioElement>}
+            source={Sound}
+          />
         </div>
         <HeartRain isShown />
         <TimeWeddingCountdown />

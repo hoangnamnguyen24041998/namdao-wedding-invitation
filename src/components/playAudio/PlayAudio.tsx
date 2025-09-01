@@ -1,15 +1,16 @@
-import { Sound } from "../../assets";
 import useAudioPlayer from "../../hooks/useAudioPlayer";
 import "./index.css";
 import { Button } from "antd";
-import { type RefObject } from "react";
+import type { RefObject } from "react";
 
 const PlayBackAudio = ({
   triggerRef,
+  source,
 }: {
   triggerRef: RefObject<HTMLAudioElement>;
+  source?: string;
 }) => {
-  const { isPlaying } = useAudioPlayer(Sound, triggerRef);
+  const { isPlaying } = useAudioPlayer(triggerRef);
 
   const togglePlayback = () => {
     const audio = triggerRef.current;
@@ -35,6 +36,7 @@ const PlayBackAudio = ({
           transition: "all 0.2s ease",
         }}
       >
+        <audio ref={triggerRef} src={source} loop />
         {isPlaying ? "⏸" : "▶️"}
       </Button>
     </div>
