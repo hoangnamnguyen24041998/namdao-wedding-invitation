@@ -1,17 +1,21 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 
 const useAudioPlayer = (
-  sound: string,
-  triggerRef: React.RefObject<HTMLElement>
+  src: string,
+  triggerRef: React.RefObject<HTMLAudioElement>
 ) => {
-  const audioRef = useRef<HTMLAudioElement | null>(null);
+  useEffect(() => {
+    const audio = triggerRef.current;
+    if (audio) {
+      audio.src = src;
+    }
+  }, [src, triggerRef]);
+
   const [isPlaying, setIsPlaying] = useState(false);
-  const hasPlayed = useRef(false);
 
   useEffect(() => {
-    const audio = new Audio(sound);
-    audio.loop = true;
-    audioRef.current = audio;
+    const audio = triggerRef.current;
+    if (!audio) return;
 
     const handlePlay = () => setIsPlaying(true);
     const handlePause = () => setIsPlaying(false);
@@ -19,34 +23,13 @@ const useAudioPlayer = (
     audio.addEventListener("play", handlePlay);
     audio.addEventListener("pause", handlePause);
 
-    const triggerPlay = async () => {
-      if (hasPlayed.current || !audio.paused) return;
-      hasPlayed.current = true;
-      try {
-        await audio.play();
-        console.log("Audio started");
-      } catch (err) {
-        console.error("Audio play failed:", err);
-      }
-    };
-
-    const handleClick = (e: MouseEvent) => {
-      if (triggerRef.current?.contains(e.target as Node)) {
-        triggerPlay();
-      }
-    };
-
-    window.addEventListener("click", handleClick, { once: true });
-
     return () => {
-      audio.pause();
       audio.removeEventListener("play", handlePlay);
       audio.removeEventListener("pause", handlePause);
-      window.removeEventListener("click", handleClick);
     };
-  }, [sound, triggerRef]);
+  }, [triggerRef]);
 
-  return { isPlaying, audioRef };
+  return { isPlaying };
 };
 
 export default useAudioPlayer;

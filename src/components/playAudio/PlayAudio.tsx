@@ -2,8 +2,13 @@ import { Sound } from "../../assets";
 import useAudioPlayer from "../../hooks/useAudioPlayer";
 import "./index.css";
 import { Button } from "antd";
+import { type RefObject } from "react";
 
-const PlayBackAudio = ({ triggerRef }: any) => {
+const PlayBackAudio = ({
+  triggerRef,
+}: {
+  triggerRef: RefObject<HTMLAudioElement>;
+}) => {
   const { isPlaying } = useAudioPlayer(Sound, triggerRef);
 
   const togglePlayback = () => {
@@ -20,13 +25,12 @@ const PlayBackAudio = ({ triggerRef }: any) => {
   return (
     <div style={{ textAlign: "center", marginTop: "2rem" }}>
       <Button
-        type="primary"
+        type="text"
         shape="circle"
         size="large"
         onClick={togglePlayback}
         className={isPlaying ? "pulse" : ""}
         style={{
-          backgroundColor: "#fefefe90",
           border: "none",
           transition: "all 0.2s ease",
         }}
