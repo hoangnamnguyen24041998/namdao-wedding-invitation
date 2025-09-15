@@ -55,18 +55,25 @@ const ListWishes = () => {
   const GOOGLE_SHEET_CSV_URL =
     "https://docs.google.com/spreadsheets/d/10fBTFk_T5rq0vXqA8HtOT3UbQP9LO55iH4OoNY8o5Xo/export?format=csv&gid=1100263779";
 
+  const PROXY_URL = `https://api.allorigins.win/raw?url=${encodeURIComponent(
+    GOOGLE_SHEET_CSV_URL
+  )}`;
+
   const fetchData = useCallback(async () => {
-    const response = await fetch(GOOGLE_SHEET_CSV_URL);
+    const response = await fetch(PROXY_URL);
     const text = await response.text();
-    const result = Papa.parse(text, { header: true });
+    const result = Papa.parse(text, {
+      header: true,
+      skipEmptyLines: true,
+    });
 
     const sanitize = (text: string) =>
       text.replace(/</g, "&lt;").replace(/>/g, "&gt;");
 
     const cleaned = result.data
       .map((row: any) => ({
-        name: sanitize(row["Tên của bạn"]?.trim() || ""),
-        wish: sanitize(row["Lời chúc"]?.trim() || ""),
+        name: sanitize(row["ten"]?.trim() || ""),
+        wish: sanitize(row["loi_chuc"]?.trim() || ""),
       }))
       .filter((row) => row.name && row.wish);
 
@@ -77,7 +84,7 @@ const ListWishes = () => {
     );
 
     setSubmissions(unique as any);
-  }, [setSubmissions]);
+  }, [PROXY_URL, setSubmissions]);
 
   useEffect(() => {
     fetchData();
@@ -98,7 +105,7 @@ const ListWishes = () => {
 
   const pauseAutoScroll = () => {
     setIsAutoScrolling(false);
-    setTimeout(() => setIsAutoScrolling(true), 500);
+    setTimeout(() => setIsAutoScrolling(true), 2500);
   };
 
   const handlePrev = () => {
@@ -110,6 +117,7 @@ const ListWishes = () => {
     pauseAutoScroll();
     setIndex((prev) => (prev + 1) % submissions.length);
   };
+
   if (submissions.length > 0)
     return (
       <div className="py-10 w-full px-4">
@@ -131,31 +139,42 @@ const ListWishes = () => {
             </Button>
           </div>
 
-          <div className="flex-grow">
-            {submissions.slice(index, index + 1).map((wish: any, i: number) => (
-              <div
-                key={`${wish.name}-${i}`}
-                className="h-full bg-white/10 backdrop-blur-md rounded-xl p-4 shadow-md text-white flex items-start gap-4"
-              >
-                <Avatar
-                  src={`https://i.pravatar.cc/${i}`}
-                  size={48}
-                  shape="circle"
-                  className="flex-shrink-0"
+          <div className="overflow-hidden w-full" ref={scrollRef}>
+            <div
+              className="flex transition-transform duration-500 ease-in-out"
+              style={{
+                transform: `translateX(-${index * 100}%)`,
+                width: `${submissions.length * 100}%`,
+              }}
+            >
+              {submissions.map((wish: any, i: number) => (
+                <div
+                  key={`${wish.name}-${i}`}
+                  className="w-full flex-shrink-0 px-4"
+                  style={{ width: "100%" }}
                 >
-                  {wish.name.charAt(0)}
-                </Avatar>
-                <div>
-                  <Typography.Text className="font-semibold text-white">
-                    {wish.name}
-                  </Typography.Text>
-                  <br />
-                  <Typography.Text className="text-gray-300 line-clamp-2">
-                    {wish.wish}
-                  </Typography.Text>
+                  <div className="h-full bg-white/10 backdrop-blur-md rounded-xl p-4 shadow-md text-white flex items-start gap-4">
+                    <Avatar
+                      src={`https://i.pravatar.cc/${i}`}
+                      size={48}
+                      shape="circle"
+                      className="flex-shrink-0"
+                    >
+                      {wish.name.charAt(0)}
+                    </Avatar>
+                    <div>
+                      <Typography.Text className="font-semibold text-white">
+                        {wish.name}
+                      </Typography.Text>
+                      <br />
+                      <Typography.Text className="text-gray-300 line-clamp-2">
+                        {wish.wish}
+                      </Typography.Text>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
 
           <div
