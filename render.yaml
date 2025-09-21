@@ -1,0 +1,7 @@
+services:
+  - type: static
+    name: namdao-wedding
+    repo: https://github.com/hoangnamnguyen24041998/namdao-wedding-invitation
+    branch: develop
+    buildCommand: npm ci && npm run build
+    publishPath: dist
