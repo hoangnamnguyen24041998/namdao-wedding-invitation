@@ -4,7 +4,6 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import "./index.css";
 import { useS } from "use-s-react";
-import Papa from "papaparse";
 import { ReactSVG } from "react-svg";
 import { IcLeft, IcRight } from "../../assets";
 
@@ -22,35 +21,35 @@ const ListWishes = () => {
   const [isAutoScrolling, setIsAutoScrolling] = useState(true);
   const scrollRef = useRef<HTMLDivElement>(null);
 
-  const GOOGLE_SHEET_CSV_URL =
-    "https://docs.google.com/spreadsheets/d/10fBTFk_T5rq0vXqA8HtOT3UbQP9LO55iH4OoNY8o5Xo/export?format=csv&gid=1100263779";
-
-  const PROXY_URL = `https://api.allorigins.win/raw?url=${encodeURIComponent(
-    GOOGLE_SHEET_CSV_URL
-  )}`;
+  const SHEET_ID = "10fBTFk_T5rq0vXqA8HtOT3UbQP9LO55iH4OoNY8o5Xo";
+  const RANGE = "ANSWER!A:C"; // Adjust if needed
+  const API_KEY = "AIzaSyB5XlYPECGzi-mNOPi5rQj_wcGpzZeDGx4";
+  const GOOGLE_SHEET_API_URL = `https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/${RANGE}?key=${API_KEY}`;
 
   const fetchData = useCallback(async () => {
     try {
-      const response = await fetch(PROXY_URL);
-      const text = await response.text();
-      const result = Papa.parse(text, {
-        header: true,
-        skipEmptyLines: true,
-      });
+      const response = await fetch(GOOGLE_SHEET_API_URL);
+      const data = await response.json();
 
+      if (!data.values || data.values.length < 2) {
+        setSubmissions([]);
+        return;
+      }
+
+      const rows = data.values.slice(1); // Skip header
       const sanitize = (text: string) =>
         text.replace(/</g, "&lt;").replace(/>/g, "&gt;");
 
-      const cleaned = result.data
-        .map((row: any) => ({
-          name: sanitize(row["ten"]?.trim() || ""),
-          wish: sanitize(row["loi_chuc"]?.trim() || ""),
+      const cleaned = rows
+        .map(([_name, _wish]: any) => ({
+          name: sanitize(_name?.trim() || ""),
+          wish: sanitize(_wish?.trim() || ""),
         }))
-        .filter((row) => row.name && row.wish);
+        .filter((rows: any) => rows.name && rows.wish);
 
       const unique = Array.from(
         new Map(
-          cleaned.map((item) => [`${item.name}-${item.wish}`, item])
+          cleaned.map((items: any) => [`${items.name}-${items.wish}`, items])
         ).values()
       );
 
@@ -60,7 +59,7 @@ const ListWishes = () => {
     } finally {
       setLoading(false);
     }
-  }, [PROXY_URL, setSubmissions]);
+  }, [GOOGLE_SHEET_API_URL, setSubmissions]);
 
   useEffect(() => {
     fetchData();
@@ -155,12 +154,7 @@ const ListWishes = () => {
                   style={{ width: "100%" }}
                 >
                   <div className="h-full bg-white/10 backdrop-blur-md rounded-xl p-4 shadow-md text-white flex items-start gap-4">
-                    <Avatar
-                      src={`https://i.pravatar.cc/${i}`}
-                      size={48}
-                      shape="circle"
-                      className="flex-shrink-0"
-                    >
+                    <Avatar size={48} shape="circle" className="flex-shrink-0">
                       {wish.name.charAt(0)}
                     </Avatar>
                     <div>
