@@ -30,13 +30,13 @@ const PlayBackAudio = ({
         shape="circle"
         size="large"
         onClick={togglePlayback}
-        className={isPlaying ? "pulse" : ""}
+        className={`playback-button ${isPlaying ? "pulse" : ""}`}
         style={{
           border: "none",
           transition: "all 0.2s ease",
         }}
       >
-        <audio ref={triggerRef} src={source} loop />
+        <audio ref={triggerRef} src={source} loop playsInline preload="auto" />
         {isPlaying ? "⏸" : "▶️"}
       </Button>
     </div>

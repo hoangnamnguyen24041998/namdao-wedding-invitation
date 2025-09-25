@@ -8,7 +8,7 @@ import WeddingAlbum from "./components/WeddingAlbum/WeddingAlbum";
 import GuestbookForm from "./components/GuestBook";
 import ConfirmInvitation from "./components/ConfirmInvitation";
 import ListWishes from "./components/ListWishes/ListWishes";
-import { useRef, useState, type RefObject } from "react";
+import { useRef, useState, useEffect, type RefObject } from "react";
 import MoneyBoxModal from "./components/MoneyBoxModal";
 import ThankYouCard from "./components/ThankYouCard/ThankYouCard";
 import AutoScrollMobile from "./components/AutoScrollMobile";
@@ -18,6 +18,44 @@ import { Sound } from "./assets";
 function App() {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const audioRef = useRef<HTMLAudioElement>(null);
+
+  // Attempt to start audio when user first scrolls or touches the page
+  useEffect(() => {
+    let handled = false;
+    const tryPlay = async () => {
+      if (handled) return;
+      handled = true;
+      const audio = audioRef.current;
+      if (!audio) return;
+      try {
+        await audio.play();
+      } catch {
+        // play may fail due to browser policies; user can manually start
+        // we ignore the error
+      }
+      // cleanup listeners after first attempt
+      window.removeEventListener("scroll", onFirstInteraction);
+      window.removeEventListener("touchstart", onFirstInteraction);
+    };
+
+    const onFirstInteraction = () => {
+      tryPlay();
+    };
+
+    window.addEventListener("scroll", onFirstInteraction, {
+      once: true,
+      passive: true,
+    });
+    window.addEventListener("touchstart", onFirstInteraction, {
+      once: true,
+      passive: true,
+    });
+
+    return () => {
+      window.removeEventListener("scroll", onFirstInteraction);
+      window.removeEventListener("touchstart", onFirstInteraction);
+    };
+  }, [audioRef]);
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });

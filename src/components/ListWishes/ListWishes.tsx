@@ -142,7 +142,7 @@ const ListWishes = () => {
         <Spin spinning={loading}>
           <div className="overflow-hidden w-full" ref={scrollRef}>
             <div
-              className="flex transition-transform duration-700 ease-in-out"
+              className="flex items-stretch transition-transform duration-700 ease-in-out"
               style={{
                 transform: `translateX(-${index * 100}%)`,
                 width: `${submissions.length * 100}%`,
@@ -154,7 +154,7 @@ const ListWishes = () => {
                   className="w-full flex-shrink-0 px-4"
                   style={{ width: "100%" }}
                 >
-                  <div className="h-full bg-white/10 backdrop-blur-md rounded-xl p-4 shadow-md text-white flex items-start gap-4">
+                  <div className="h-full min-h-[140px] bg-white/10 backdrop-blur-md rounded-xl p-4 shadow-md text-white flex items-start gap-4">
                     <Avatar size={48} shape="circle" className="flex-shrink-0">
                       {(() => {
                         const name = (wish.name || "").trim();
@@ -175,7 +175,7 @@ const ListWishes = () => {
                         {wish.name}
                       </Typography.Text>
                       <br />
-                      <Typography.Text className="text-gray-300 line-clamp-2">
+                      <Typography.Text className="text-gray-300 line-clamp-3">
                         {wish.wish}
                       </Typography.Text>
                     </div>
