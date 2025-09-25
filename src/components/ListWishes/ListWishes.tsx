@@ -130,69 +130,75 @@ const ListWishes = () => {
         💌 Lời chúc từ bạn bè
       </Typography.Title>
 
-      <div className="flex items-center justify-center gap-4 w-full max-w-screen-md mx-auto">
-        <Button
-          type="text"
-          className="w-12 h-12 p-0 bg-transparent border-none shadow-none"
-          onClick={handlePrev}
-        >
-          <ReactSVG src={IcLeft} className="w-6 h-6" />
-        </Button>
+      <div className="flex items-center justify-center gap-4 w-full">
+        <div className="w-2/3 max-w-screen-md mx-auto">
+          <Button
+            type="text"
+            className="w-12 h-12 p-0 bg-transparent border-none shadow-none"
+            onClick={handlePrev}
+          >
+            <ReactSVG src={IcLeft} className="w-6 h-6" />
+          </Button>
 
-        <Spin spinning={loading}>
-          <div className="overflow-hidden w-full" ref={scrollRef}>
-            <div
-              className="flex items-stretch transition-transform duration-700 ease-in-out"
-              style={{
-                transform: `translateX(-${index * 100}%)`,
-                width: `${submissions.length * 100}%`,
-              }}
-            >
-              {submissions.map((wish: any, i: number) => (
-                <div
-                  key={`${wish.name}-${i}`}
-                  className="w-full flex-shrink-0 px-4"
-                  style={{ width: "100%" }}
-                >
-                  <div className="h-full min-h-[140px] bg-white/10 backdrop-blur-md rounded-xl p-4 shadow-md text-white flex items-start gap-4">
-                    <Avatar size={48} shape="circle" className="flex-shrink-0">
-                      {(() => {
-                        const name = (wish.name || "").trim();
-                        if (!name) return "?";
-                        const parts = name.split(/\s+/).filter(Boolean);
-                        if (parts.length === 1) {
-                          // Single word: return first two characters (uppercase)
-                          return parts[0].slice(0, 2).toUpperCase();
-                        }
-                        // Multi-word: take first letter of first two words
-                        return (
-                          (parts[0][0] || "") + (parts[1][0] || "")
-                        ).toUpperCase();
-                      })()}
-                    </Avatar>
-                    <div>
-                      <Typography.Text className="font-semibold text-white">
-                        {wish.name}
-                      </Typography.Text>
-                      <br />
-                      <Typography.Text className="text-gray-300 line-clamp-3">
-                        {wish.wish}
-                      </Typography.Text>
+          <Spin spinning={loading}>
+            <div className="overflow-hidden w-full" ref={scrollRef}>
+              <div
+                className="flex items-stretch transition-transform duration-700 ease-in-out"
+                style={{
+                  transform: `translateX(-${index * 100}%)`,
+                  width: `${submissions.length * 100}%`,
+                }}
+              >
+                {submissions.map((wish: any, i: number) => (
+                  <div
+                    key={`${wish.name}-${i}`}
+                    className="w-full flex-shrink-0 px-4"
+                    style={{ width: "100%" }}
+                  >
+                    <div className="h-full min-h-[140px] bg-white/10 backdrop-blur-md rounded-xl p-4 shadow-md text-white flex items-start gap-4 border-2 border-pink-400">
+                      <Avatar
+                        size={48}
+                        shape="circle"
+                        className="flex-shrink-0"
+                      >
+                        {(() => {
+                          const name = (wish.name || "").trim();
+                          if (!name) return "?";
+                          const parts = name.split(/\s+/).filter(Boolean);
+                          if (parts.length === 1) {
+                            // Single word: return first two characters (uppercase)
+                            return parts[0].slice(0, 2).toUpperCase();
+                          }
+                          // Multi-word: take first letter of first two words
+                          return (
+                            (parts[0][0] || "") + (parts[1][0] || "")
+                          ).toUpperCase();
+                        })()}
+                      </Avatar>
+                      <div>
+                        <Typography.Text className="font-semibold text-white">
+                          {wish.name}
+                        </Typography.Text>
+                        <br />
+                        <Typography.Text className="text-gray-300 line-clamp-3">
+                          {wish.wish}
+                        </Typography.Text>
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
-          </div>
-        </Spin>
+          </Spin>
 
-        <Button
-          type="text"
-          className="w-12 h-12 p-0 bg-transparent border-none shadow-none"
-          onClick={handleNext}
-        >
-          <ReactSVG src={IcRight} className="w-6 h-6" />
-        </Button>
+          <Button
+            type="text"
+            className="w-12 h-12 p-0 bg-transparent border-none shadow-none"
+            onClick={handleNext}
+          >
+            <ReactSVG src={IcRight} className="w-6 h-6" />
+          </Button>
+        </div>
       </div>
 
       <div className="mt-6">{renderDots()}</div>
