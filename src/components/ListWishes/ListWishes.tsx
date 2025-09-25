@@ -155,13 +155,20 @@ const ListWishes = () => {
                   style={{ width: "100%" }}
                 >
                   <div className="h-full bg-white/10 backdrop-blur-md rounded-xl p-4 shadow-md text-white flex items-start gap-4">
-                    <Avatar
-                      src={`https://i.pravatar.cc/${i}`}
-                      size={48}
-                      shape="circle"
-                      className="flex-shrink-0"
-                    >
-                      {wish.name.charAt(0)}
+                    <Avatar size={48} shape="circle" className="flex-shrink-0">
+                      {(() => {
+                        const name = (wish.name || "").trim();
+                        if (!name) return "?";
+                        const parts = name.split(/\s+/).filter(Boolean);
+                        if (parts.length === 1) {
+                          // Single word: return first two characters (uppercase)
+                          return parts[0].slice(0, 2).toUpperCase();
+                        }
+                        // Multi-word: take first letter of first two words
+                        return (
+                          (parts[0][0] || "") + (parts[1][0] || "")
+                        ).toUpperCase();
+                      })()}
                     </Avatar>
                     <div>
                       <Typography.Text className="font-semibold text-white">
