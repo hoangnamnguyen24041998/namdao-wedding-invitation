@@ -126,6 +126,8 @@ const ListWishes = () => {
         level={3}
         className="text-center text-white mb-6"
         data-aos="fade-down"
+        data-sal="slide-up"
+        data-sal-duration="800"
       >
         💌 Lời chúc từ bạn bè
       </Typography.Title>
